@@ -1,0 +1,80 @@
+[
+  {
+    "title": "Starter",
+    "name": "Landing Page Design",
+    "price": "Rp 450.000",
+    "best": [
+      "Untuk personal project atau bisnis kecil",
+      "Cocok bagi yang butuh tampilan cepat & sederhana",
+      "Ideal untuk validasi ide produk awal"
+    ],
+    "get": [
+      "3 screens design",
+      "Wireframe + High-fidelity",
+      "Basic design system",
+      "2x revisi",
+      "Figma file",
+      "5-7 hari kerja",
+      "Bundle dengan development: Rp 1.650.000 (hemat 300k)"
+    ]
+  },
+  {
+    "title": "Business",
+    "name": "Multi-page Website Design",
+    "price": "Rp 750.000",
+    "best": [
+      "Untuk bisnis berkembang dengan banyak halaman",
+      "Cocok untuk website company profile atau produk multi",
+      "Fokus pada flow pengguna dan pengalaman navigasi"
+    ],
+    "get": [
+      "6-8 screens design",
+      "Complete user flows",
+      "Full design system",
+      "Interactive prototype",
+      "3x revisi",
+      "Figma file + assets",
+      "1-2 minggu pengerjaan",
+      "Bundle dengan development: Rp 2.750.000 (hemat 500k)"
+    ]
+  },
+  {
+    "title": "Professional",
+    "name": "Custom Website Design",
+    "price": "Rp 1.500.000",
+    "best": [
+      "Untuk bisnis mapan dengan kebutuhan desain khusus",
+      "Cocok bagi tim internal, startup, atau corporate",
+      "Butuh hasil profesional dengan riset UX mendalam"
+    ],
+    "get": [
+      "12-15 screens (comprehensive)",
+      "UX research included",
+      "Complete design system",
+      "Advanced interactions",
+      "Unlimited revisi (reasonable)",
+      "Full documentation",
+      "2-3 minggu pengerjaan",
+      "Bundle dengan development: Rp 5.900.000 (hemat 1,1jt)"
+    ]
+  },
+  {
+    "title": "Enterprise",
+    "name": "Web App / SaaS Design",
+    "price": "Mulai 3,5 Juta +",
+    "best": [
+      "Startup yang membangun produk digital (MVP)",
+      "Platform kompleks seperti dashboard, SaaS, atau internal system",
+      "Perlu kolaborasi desain dengan tim development"
+    ],
+    "get": [
+      "Unlimited screens (modular system)",
+      "UX audit & information architecture",
+      "Full design system + documentation",
+      "Advanced prototype & micro interaction",
+      "Design token ready for dev handoff",
+      "4-6 minggu pengerjaan",
+      "Bundle dengan development: custom pricing"
+    ]
+  }
+]

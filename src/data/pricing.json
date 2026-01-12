@@ -1,0 +1,43 @@
+[
+  {
+    "title": "Company Profile",
+    "subtitle": "Bangun website kamu dengan template yang sudah kami siapkan, kemudian akan kami sesuaikan dengan konten bisnis anda",
+    "pricing": "Rp 2.500.000",
+    "detail": [
+      "5 Halaman(Home, Tentang Kami, Layanan, Kontak, 1 Halaman Tambahan )",
+      "Desain pilih sesuai template",
+      "Mobile Responsive",
+      "Optimisasi SEO dasar (Judul & deskripsi Google)",
+      "Form kontrak terintergrasi email atau kontak whatsapp",
+      "Sudah termasuk domain.com, dan hosting",
+      "Lama pengerjaan 7-14 hari"
+    ]
+  },
+  {
+    "title": "Design UI/UX",
+    "subtitle": "Kami menyediakan layanan hanya untuk kebutuhan design UI/UX website atau aplikasi anda, design bisa disesuaikan dengan yang anda inginkan",
+    "pricing": "Rp 625.000",
+    "detail": [
+      "6 Halaman/screen",
+      "Custom design (tanpa template pasaran)",
+      "Design system dasar (color palette, typography, buttons)",
+      "Wireframe + High-fidelity design",
+      "Revisi maksimal 3x",
+      "Estimasi waktu: 7–14 hari kerja",
+      "Format: Figma (file desain)"
+    ]
+  },
+  {
+    "title": "Custom Web App (Advanced)",
+    "subtitle": "Kami bisa membuatkan website custome seperti aplikasi CRM, ERP, HRIS, E-commerce, sesuai dengan request yang anda inginkan",
+    "pricing": "Flexible",
+    "detail": [
+      "Sudah include design UI/UX",
+      "Frontend Development",
+      "Backend Development",
+      "Hosting & Domain VPS",
+      "API-ready(bisa intergrasi dengan aplikasi mobile)",
+      "Estimasi waktu: disesuaikan dengan kompleksitas aplikasi"
+    ]
+  }
+]

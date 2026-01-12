@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Pendekatan yang Dipersonalisasi",
+    "desc": "Setiap proyek kami sesuaikan dengan kebutuhan dan tujuan bisnis Anda.",
+    "icon": "FiUsers"
+  },
+  {
+    "title": "Desain yang Menarik & Fungsional",
+    "desc": "Menggabungkan estetika modern dengan pengalaman pengguna yang optimal.",
+    "icon": "FiFigma"
+  },
+  {
+    "title": "Teknologi Terkini",
+    "desc": "Menggunakan stack terbaru untuk hasil yang cepat, aman, dan scalable.",
+    "icon": "FiCpu"
+  },
+  {
+    "title": "Proses Kolaboratif",
+    "desc": "Kami percaya proyek terbaik lahir dari kerja sama yang transparan dengan klien.",
+    "icon": "FiCoffee"
+  },
+  {
+    "title": "Dukungan Berkelanjutan",
+    "desc": "Tidak hanya selesai saat proyek selesai, kami tetap hadir untuk memastikan kelancaran Anda.",
+    "icon": "FiZap"
+  },
+  {
+    "title": "Biaya yang terjangkau",
+    "desc": "Dytama meyakinkan anda budget develope yang flexible dan dapat disesuaikan",
+    "icon": "FiDollarSign"
+  }
+]

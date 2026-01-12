@@ -1,0 +1,30 @@
+[
+  {
+    "job_position": "Sr. Frontend Enginner & UI/UX",
+    "company": "PT. Seino Indomobil Logistics",
+    "job_desc": "Pengalaman yang menarik disini, saat disini saya mulai fokus dalam hal frontend engineer dan UI/UX, di perusahaan ini saya juga mengerjakan fullstack developer untuk website, serta juga saya memipin dalam setiap perencanaan antar muka disetiap aplikasi baik mobile ataupun website",
+    "start_date": "2020",
+    "end_date": "Sekarang"
+  },
+  {
+    "job_position": "IT Programmer ASP.NET C#",
+    "company": "PT. Dasa Prima",
+    "job_desc": "Melakukan pengembangan aplikasi website berbasis ASP.Net C#, serta menggunakan database SQL Server. Saat diperusahaan ini saya bertugas sebagai fullstack developer, saya beratanggung jawab dalamm berjalannya sistem yang ada didalam perusahaan, kemudian di perusahaan ini juga saya membangun core system internal perusahaan yang berbasiskan web dengan framework laravel",
+    "start_date": "2018",
+    "end_date": "2020"
+  },
+  {
+    "job_position": "Web Developer",
+    "company": "PT. BMT Digital",
+    "job_desc": "Di dalam perusahaan saya membuat aplikasi untuk Point of Sale dan Profil Perusahaan Berbasis Website, kami mengembangkan proyek ini dengan fullstack php native dan menggabungkan dengan jquery, untuk database kami menggunakan MySql Server",
+    "start_date": "2017",
+    "end_date": "2018"
+  },
+  {
+    "job_position": "Internship Programmer Fullstack PHP",
+    "company": "PT Inti Ganda Perdana (Astra Group) | Jakarta - IDN",
+    "job_desc": "Awal karir saya memulainya di PT Inti Ganda Perdana, disini saya ditempakan untuk membangun aplikasi yang digunakan untuk membantu divisi Quality Assurance, saya membangun sistem penjadwalan kalibrasi alat ukur berbasiskan website, project ini saya bangun dengan waktu kurang lebih satu tahun, aplikasi ini juga yang saya gunakan sebagai tugas akhir",
+    "start_date": "2016",
+    "end_date": "2017"
+  }
+]

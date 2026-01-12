@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply text-foreground border-border;
+  background-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #131316;
+    --muted-foreground: hsl(0, 0%, 41%);
+    --light: #5ba8ff;
+    --card: #eaeaea;
+    --border: #d5d5d5;
+  }
+
+  .dark {
+    --background: #000319;
+    --foreground: #eeeeec;
+    --muted-foreground: #aba9a3;
+    --light: #016fee;
+    --card: #1c1c1c;
+    --border: #202020;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}

@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Figma",
+    "url": "/assets/img/technology/figma.png"
+  },
+  {
+    "title": "Git",
+    "url": "/assets/img/technology/git.png"
+  },
+  {
+    "title": "NextJs",
+    "url": "/assets/img/technology/nextjs2.png"
+  },
+  {
+    "title": "NodeJs",
+    "url": "/assets/img/technology/nodejs.png"
+  },
+  {
+    "title": "React",
+    "url": "/assets/img/technology/react.png"
+  },
+  {
+    "title": "HTML",
+    "url": "/assets/img/technology/html.png"
+  },
+  {
+    "title": "CSharp",
+    "url": "/assets/img/technology/csharp.png"
+  },
+  {
+    "title": "CodeIgniter",
+    "url": "/assets/img/technology/codeigniter.png"
+  },
+  {
+    "title": "Laravel",
+    "url": "/assets/img/technology/laravel.png"
+  }
+]

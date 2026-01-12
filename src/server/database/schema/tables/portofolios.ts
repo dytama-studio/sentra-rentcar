@@ -1,0 +1,30 @@
+import {
+  pgTable,
+  text,
+  uuid,
+  varchar,
+  jsonb,
+  timestamp,
+} from "drizzle-orm/pg-core";
+
+export const portofolios = pgTable("portofolios", {
+  id: uuid("id").notNull().primaryKey().defaultRandom(),
+  title: varchar("title", { length: 255 }).notNull(),
+  slug: varchar("slug", { length: 255 }).notNull().unique(),
+  type: varchar("type", { length: 100 }).notNull(),
+  overviewDescription: jsonb("overview_description"),
+  technologies: jsonb("technologies").$type<string[]>(),
+  challenges: text("challenges"),
+  solutions: text("solutions"),
+  features: text("features"),
+  client: varchar("client", { length: 255 }),
+  projectYear: varchar("project_year", { length: 500 }),
+  projectLink: varchar("project_link", { length: 500 }),
+  duration: varchar("duration", { length: 100 }),
+  metaTitle: varchar("meta_title", { length: 500 }),
+  metaDescription: text("meta_description"),
+  metaKeywords: varchar("meta_keywords", { length: 500 }),
+  cover: varchar("cover_img", { length: 500 }),
+  createdAt: timestamp("created_at").defaultNow(),
+  updatedAt: timestamp("updated_at").defaultNow(),
+});

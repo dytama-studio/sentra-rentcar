@@ -1,0 +1,22 @@
+[
+  {
+    "title": "Discover and ideation",
+    "desc": "Menggali secara mendalam ide, tujuan, dan kebutuhan proyek untuk memastikan hasil akhir sesuai harapan serta memberikan nilai tambah yang maksimal bagi bisnis Anda.",
+    "imgUrl": "/assets/img/illustration/Work-1.svg"
+  },
+  {
+    "title": "Planning & Wireframing",
+    "desc": "Membuat rancangan visual dan pengalaman pengguna yang menarik, intuitif, serta konsisten dengan identitas brand Anda agar mampu memikat dan mempertahankan audiens.",
+    "imgUrl": "/assets/img/illustration/Work-2.svg"
+  },
+  {
+    "title": "Development & Integration",
+    "desc": "Mengembangkan sistem dengan teknologi terkini yang cepat, aman, responsif, serta terintegrasi mulus dengan berbagai layanan dan perangkat.",
+    "imgUrl": "/assets/img/illustration/Work-3.svg"
+  },
+  {
+    "title": "Go live & Support",
+    "desc": "Meluncurkan proyek secara optimal disertai dukungan berkelanjutan untuk menjaga performa, keamanan, dan relevansi di masa depan.",
+    "imgUrl": "/assets/img/illustration/Work-4.svg"
+  }
+]

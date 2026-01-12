@@ -1,0 +1,26 @@
+[
+  {
+    "id": "ft-001",
+    "title": "Web Developer",
+    "desc": "Dytama membangun pengalaman baru pada website yang memadukan antara estetika dan fungsi, serta memadukan dengan teknologi terbaru",
+    "icon": "/assets/img/icon/web-dev.svg"
+  },
+  {
+    "id": "ft-002",
+    "title": "UI/UX",
+    "desc": "Merancang desain yang tidak hanya indah secara visual, tetapi juga efektif dan mudah digunakan. Mulai bangun UI anda bersama dytama",
+    "icon": "/assets/img/icon/ui-ux.svg"
+  },
+  {
+    "id": "ft-003",
+    "title": "SEO Optimize",
+    "desc": "Membantu website Anda tampil di halaman pertama mesin pencari untuk menjangkau audiens yang tepat.",
+    "icon": "/assets/img/icon/seo-op.svg"
+  },
+  {
+    "id": "ft-004",
+    "title": "Digital Product",
+    "desc": "Anda mempunyai ide secara digitial dan bingung harus dari mana, dytama membantu membuat product digita yang siap pakai dan scalable",
+    "icon": "/assets/img/icon/digital-product.svg"
+  }
+]

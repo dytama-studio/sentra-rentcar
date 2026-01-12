@@ -1,0 +1,77 @@
+[
+  {
+    "title": "Starter",
+    "name": "Landing Page Development",
+    "price": "Rp 1.500.000",
+    "best": [
+      "UMKM baru mulai",
+      "Budget terbatas",
+      "Butuh online presence cepat"
+    ],
+    "get": [
+      "1 Landing page responsive",
+      "Basic CMS",
+      "Form kontak WhatsApp",
+      "Domain + Hosting (1 Tahun)",
+      "SSL Certificate",
+      "Basic SEO",
+      "1 Bulan Support"
+    ]
+  },
+  {
+    "title": "Business",
+    "name": "Multi-page Development",
+    "price": "Rp 2.500.000",
+    "best": [
+      "UMKM Berkembang",
+      "Multiple Produk/Jasa",
+      "Mulai Fokus Digital Marketing"
+    ],
+    "get": [
+      "5-7 halaman website",
+      "Advance CMS",
+      "Blog management",
+      "Portofolio section",
+      "Domain + Hosting (1 Tahun)",
+      "Advance SEO",
+      "Google Analytics",
+      "2 Bulan Support"
+    ]
+  },
+  {
+    "title": "Professional",
+    "name": "Custom Development",
+    "price": "Rp 5.500.000",
+    "best": [
+      "Business Established",
+      "Butuh Custome Features",
+      "Intergration Requirements"
+    ],
+    "get": [
+      "10-15 custom pages",
+      "Advance CMS custom fields",
+      "Costom Features.",
+      "Admin dashboard",
+      "Third-party intergrations",
+      "VPS Hosting",
+      "Advance SEO & optimization",
+      "3 bulan support"
+    ]
+  },
+  {
+    "title": "Enterprise",
+    "name": "Web Application",
+    "price": "Mulai 12 Juta + ",
+    "best": ["Startup MVP", "Complex Platform", "Internal system"],
+    "get": [
+      "Unlimited Page",
+      "Advance CMS custom fields",
+      "Full-stack development",
+      "Complex features & logic",
+      "Third-party intergrations",
+      "VPS sesuai kompleksitas",
+      "Scalable architecture",
+      "6 bulan support"
+    ]
+  }
+]

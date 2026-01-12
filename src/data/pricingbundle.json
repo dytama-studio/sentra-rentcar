@@ -1,0 +1,46 @@
+[
+  {
+    "tier": "STARTER",
+    "description": "Landing Page",
+    "uiux_design": "Rp 450.000",
+    "web_development": "Rp 1.500.000",
+    "bundle": "Rp 1.650.000",
+    "hemat": {
+      "value": "Rp 300.000",
+      "percent": "15%"
+    }
+  },
+  {
+    "tier": "BUSINESS",
+    "description": "Multi-Page",
+    "uiux_design": "Rp 750.000",
+    "web_development": "Rp 2.500.000",
+    "bundle": "Rp 2.750.000",
+    "hemat": {
+      "value": "Rp 500.000",
+      "percent": "15%"
+    }
+  },
+  {
+    "tier": "PROFESSIONAL",
+    "description": "Custom",
+    "uiux_design": "Rp 1.500.000",
+    "web_development": "Rp 5.500.000",
+    "bundle": "Rp 5.900.000",
+    "hemat": {
+      "value": "Rp 1.100.000",
+      "percent": "16%"
+    }
+  },
+  {
+    "tier": "ENTERPRISE",
+    "description": "Web App",
+    "uiux_design": "Custom (included)",
+    "web_development": "Starting 12jt",
+    "bundle": "Starting 14jt (all-inclusive)",
+    "hemat": {
+      "value": "Custom",
+      "percent": "up to 20%"
+    }
+  }
+]
