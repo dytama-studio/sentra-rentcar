@@ -1,10 +1,8 @@
 import type { Config } from "tailwindcss";
-import { heroui } from "@heroui/react";
 
 const config: Config = {
   darkMode: "class",
   content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/modules/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
@@ -32,7 +30,7 @@ const config: Config = {
         white: "#FFFFFF",
         black: {
           // ...colors.black,
-          DEFAULT: "#1E293B",
+          DEFAULT: "#37394F",
           2: "#010101",
         },
         primary: "#4338CA",
@@ -312,6 +310,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [heroui(), require("@tailwindcss/typography")],
+  plugins: [],
 };
 export default config;

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import "../styles/globals.css";
 import { siteConfig } from "@/config/site";
-import { AOSInit } from "@/components/aos";
 import { fontSans } from "@/config/font";
 import Script from "next/script";
 import NextTopLoader from "nextjs-toploader";
@@ -78,7 +77,6 @@ export default async function RootLayout({
         </Script>
       </head>
       <body className={fontSans.className}>
-        <AOSInit />
         <NextTopLoader
           color="#D1F701"
           initialPosition={0.08}
