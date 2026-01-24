@@ -1,17 +1,17 @@
+"use client";
 import Container from "@/components/container";
 import React from "react";
+import { useLanding } from "./action/uselanding.action";
+import { carList } from "./mockdata";
+import CarCard from "./molecules/CarCard";
+import Link from "next/link";
+import { FiArrowUpRight } from "react-icons/fi";
 
 const CarSection = () => {
-  const tabs = [
-    { id: "all", name: "All" },
-    { id: "city car", name: "City Car" },
-    { id: "sedan", name: "Sedan" },
-    { id: "mpv", name: "MPV" },
-    { id: "van", name: "Van" },
-  ];
+  const { handleChangeTab, tabs, tabActive } = useLanding();
 
   return (
-    <section className="relative justify-center mt-5 lg:mt-10" id="car">
+    <section className="relative justify-center mt-5 lg:mt-10" id="CarList">
       <Container>
         <div className="flex flex-col lg:flex-row w-full justify-start lg:justify-between">
           <div className="flex flex-col">
@@ -38,7 +38,7 @@ const CarSection = () => {
               fleksibel, armada terawat, dan harga transparan. Cocok untuk
               kebutuhan harian, perjalanan bisnis, hingga liburan keluarga.
             </p>
-            <div className="flex w-full justify-end">
+            <div className="flex w-full justify-start lg:justify-end">
               <div className="flex bg-gray-100 hover:bg-gray-200 rounded-lg transition p-1 dark:bg-neutral-700 dark:hover:bg-neutral-600">
                 <nav
                   className="flex gap-x-1"
@@ -50,12 +50,15 @@ const CarSection = () => {
                     return (
                       <button
                         key={key}
+                        onClick={() => {
+                          handleChangeTab(item.id);
+                        }}
                         type="button"
-                        className="bg-none text-gray-700 hs-tab-active:dark:bg-neutral-800 hs-tab-active:dark:text-neutral-400 dark:hs-tab-active:bg-gray-800 py-2.5 px-4 inline-flex items-center gap-x-2 bg-transparent text-sm  hover:text-gray-700 focus:outline-hidden focus:text-gray-700 font-medium rounded-lg hover:hover:text-blue-600 disabled:opacity-50 disabled:pointer-events-none dark:text-neutral-400 dark:hover:text-white dark:focus:text-white active"
-                        id="segment-item-1"
-                        aria-selected="true"
-                        data-hs-tab="#segment-1"
-                        aria-controls="segment-1"
+                        className={`relative py-2.5 px-4 text-sm font-medium rounded-lg transition-all duration-300 ease-in-out ${
+                          tabActive === item.id
+                            ? "bg-white text-primary shadow-sm"
+                            : "bg-transparent text-gray-600 hover:text-primary"
+                        }`}
                         role="tab"
                       >
                         {item.name}
@@ -66,6 +69,22 @@ const CarSection = () => {
               </div>
             </div>
           </div>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 mt-5 lg:mt-10">
+          {carList.map((item, key) => {
+            return <CarCard key={key} data={item} />;
+          })}
+        </div>
+        <div className="pt-5 flex w-full justify-center">
+          <Link
+            href={"/"}
+            className="flex items-center gap-2 text-primary hover:text-indigo-800 text-md font-semibold"
+          >
+            Lihat Lainnya
+            <span className="bg-indigo-100 text-primary text-sm font-medium px-2 py-2 rounded-full">
+              <FiArrowUpRight />
+            </span>
+          </Link>
         </div>
       </Container>
     </section>
