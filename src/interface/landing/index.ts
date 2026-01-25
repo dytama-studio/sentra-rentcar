@@ -8,3 +8,11 @@ export interface CarCardType {
   price: string;
   url: string;
 }
+
+export type FormPenyewaValue = {
+  date_rent: string;
+  day_rent: string;
+  name: string;
+  contact: string;
+  address: string;
+};
