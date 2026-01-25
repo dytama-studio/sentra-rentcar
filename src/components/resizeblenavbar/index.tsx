@@ -88,10 +88,8 @@ export const NavBody = ({ children, className, visible }: NavBodyProps) => {
     <motion.div
       animate={{
         backdropFilter: visible ? "blur(10px)" : "none",
-        boxShadow: visible
-          ? "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset"
-          : "none",
-        width: visible ? "40%" : "100%",
+        boxShadow: visible ? "0 10px 30px rgba(0,0,0,0.08)" : "none",
+        width: visible ? "75%" : "100%",
         y: visible ? 20 : 0,
       }}
       transition={{
@@ -233,25 +231,27 @@ export const NavbarLogo = () => {
   return (
     <a
       href="#"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
+      className="relative  z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
       <Image
-        src="/assets/img/brand/dytama-black.svg"
+        src="/assets/img/brand/sentra-color.svg"
         width={100}
         height={22}
         alt="Dytama Logo"
-        className="block dark:hidden w-20 lg:w-25"
+        className="block dark:hidden w-5 lg:w-8"
         priority
       />
-      <Image
+      {/* <Image
         src="/assets/img/brand/dytama-white.svg"
         width={100}
         height={22}
         alt="Dytama Logo"
         className="hidden dark:block w-20 lg:w-25"
         priority
-      />
-      {/* <span className="font-medium text-black dark:text-white">Startup</span> */}
+      /> */}
+      <span className=" text-sm lg:text-lg text-black font-semibold dark:text-white">
+        Sentra Rent Car
+      </span>
     </a>
   );
 };

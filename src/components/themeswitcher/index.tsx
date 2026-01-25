@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@heroui/react";
 import { useState } from "react";
 import { useTheme } from "next-themes";
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
@@ -19,15 +18,8 @@ export default function ThemeSwitcher() {
   };
 
   return (
-    <Button
-      isIconOnly
-      variant="light"
-      onPress={handleClick}
-      aria-label={
-        theme === "light" ? "Switch to dark mode" : "Switch to light mode"
-      }
-    >
+    <button className="text-xs font-normal" onClick={handleClick}>
       {svg}
-    </Button>
+    </button>
   );
 }

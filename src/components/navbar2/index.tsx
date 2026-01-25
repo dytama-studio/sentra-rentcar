@@ -6,15 +6,14 @@ import {
   NavItems,
   MobileNav,
   NavbarLogo,
-  NavbarButton,
   MobileNavHeader,
   MobileNavToggle,
   MobileNavMenu,
 } from "@/components/resizeblenavbar";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
-import ThemeSwitcher from "../themeswitcher";
 import { handleToContact } from "@/helpers/globalHelper";
+import { FiArrowRight } from "react-icons/fi";
 
 const NavbarLanding2 = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -26,13 +25,18 @@ const NavbarLanding2 = () => {
           <NavbarLogo />
           <NavItems items={siteConfig.navItems} />
           <div className="flex items-center gap-4">
-            <ThemeSwitcher />
-            <NavbarButton
+            <button
               onClick={handleToContact}
-              className="bg-secondary rounded-full"
+              className="relative inline-flex h-12 overflow-hidden rounded-full p-[1.5px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
             >
-              Contact
-            </NavbarButton>
+              <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+              <span className="inline-flex gap-2 h-full  w-full cursor-pointer items-center justify-center rounded-full bg-gradient-to-br from-zinc-800 to-slate-900 px-4 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+                Chat Whatsapp{" "}
+                <span className="w-6 h-6 bg-white text-sm p-1 text-black rounded-full flex items-center justify-center">
+                  <FiArrowRight />
+                </span>
+              </span>
+            </button>
           </div>
         </NavBody>
 
@@ -59,14 +63,20 @@ const NavbarLanding2 = () => {
               </Link>
             ))}
             <div className="flex w-full flex-col gap-4">
-              <ThemeSwitcher />
-              <NavbarButton
-                onClick={() => handleToContact()}
-                variant="primary"
-                className="w-full"
-              >
-                Book a call
-              </NavbarButton>
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={handleToContact}
+                  className="relative inline-flex h-12 overflow-hidden rounded-full p-[1.5px] focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+                >
+                  <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+                  <span className="inline-flex gap-2 h-full  w-full cursor-pointer items-center justify-center rounded-full bg-gradient-to-br from-zinc-800 to-slate-900 px-4 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+                    Chat Whatsapp{" "}
+                    <span className="w-6 h-6 bg-white text-sm p-1 text-black rounded-full flex items-center justify-center">
+                      <FiArrowRight />
+                    </span>
+                  </span>
+                </button>
+              </div>
             </div>
           </MobileNavMenu>
         </MobileNav>

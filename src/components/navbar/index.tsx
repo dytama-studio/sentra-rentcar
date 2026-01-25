@@ -1,102 +1,88 @@
-import React, { useEffect, useState } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 import {
   Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-} from "@heroui/react";
+  NavBody,
+  NavItems,
+  MobileNav,
+  MobileNavHeader,
+  MobileNavMenu,
+  MobileNavToggle,
+} from "./navbar-components";
+import { NavbarLogo, NavbarButton } from "./navbar-elements";
 import { siteConfig } from "@/config/site";
-import ThemeSwitcher from "../themeswitcher";
-import Image from "next/image";
+import { useScrollSpy } from "@/hooks/useColorSpy";
 import Link from "next/link";
 
-const NavbarLanding = () => {
-  const [scrolled, setScrolled] = useState(false);
+export default function NavbarLanding() {
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const activeId = useScrollSpy(
+    siteConfig.navItems.map((i) => i.href.replace("#", "")),
+    120
+  );
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", onScroll);
+    let last = false;
+
+    const onScroll = () => {
+      const next = window.scrollY > 10;
+      if (next !== last) {
+        last = next;
+        setIsScrolled(next);
+      }
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isMenuOpen]);
+
   return (
-    <header className="sticky top-4 inset-x-0 z-50 flex justify-center transition-all duration-300">
-      <Navbar
-        maxWidth="lg"
-        position="static"
-        isBlurred={true}
-        className={`relative border border-gray-200 dark:border-none w-full  max-w-5xl rounded-[26px] shadow-md backdrop-blur-md backdrop-saturate-150 transition-all duration-300
-          ${scrolled ? "bg-white dark:bg-neutral-900" : "bg-white dark:bg-neutral-900/60"}`}
-      >
-        {/* Mobile Toggle */}
-        <NavbarContent className="sm:hidden" justify="start">
-          <NavbarMenuToggle />
-        </NavbarContent>
+    <>
+      <Navbar isScrolled={isScrolled}>
+        <NavBody isScrolled={isScrolled}>
+          <NavbarLogo />
+          <NavItems items={siteConfig.navItems} activeId={activeId} />
+          <div className="hidden md:flex gap-4 items-center">
+            <NavbarButton>Hubungi Whatsapp</NavbarButton>
+          </div>
+        </NavBody>
 
-        {/* Logo */}
-        <NavbarContent className="basis-full sm:basis-auto" justify="start">
-          <NavbarBrand>
-            <Link href="/" className="flex items-center">
-              <Image
-                src="/assets/img/brand/dytama-black.svg"
-                width={100}
-                height={22}
-                alt="Dytama Logo"
-                className="block dark:hidden"
-                priority
-              />
-              <Image
-                src="/assets/img/brand/dytama-white.svg"
-                width={100}
-                height={22}
-                alt="Dytama Logo"
-                className="hidden dark:block"
-                priority
-              />
-            </Link>
-          </NavbarBrand>
-        </NavbarContent>
-
-        {/* Desktop Menu */}
-        <NavbarContent className="hidden md:flex gap-x-6" justify="center">
-          {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
-              <Link
-                href={item.href}
-                className="text-xs lg:text-[13px] font-normal text-black dark:text-white hover:text-neutral-400 transition-colors"
-              >
-                {item.label}
-              </Link>
-            </NavbarItem>
-          ))}
-        </NavbarContent>
-
-        {/* Theme Switcher */}
-        <NavbarContent justify="end">
-          <NavbarItem>
-            <ThemeSwitcher />
-          </NavbarItem>
-        </NavbarContent>
-
-        {/* Mobile Menu */}
-        <NavbarMenu className="bg-white dark:bg-neutral-900 px-4 py-10">
-          {siteConfig.navItems.map((item) => (
-            <NavbarMenuItem key={item.href}>
-              <Link
-                href={item.href}
-                className="block py-2 text-sm text-black dark:text-white hover:text-neutral-300"
-              >
-                {item.label}
-              </Link>
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
+        <MobileNav isScrolled={isScrolled}>
+          <MobileNavHeader>
+            <NavbarLogo />
+            <MobileNavToggle
+              isOpen={isMenuOpen}
+              onClick={() => setIsMenuOpen(true)}
+            />
+          </MobileNavHeader>
+        </MobileNav>
       </Navbar>
-    </header>
-  );
-};
+      <MobileNavMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
+        {siteConfig.navItems.map((item) => {
+          return (
+            <Link
+              key={item.href}
+              href={item.href}
+              onClick={() => setIsMenuOpen(false)}
+              className="text-lg font-medium"
+            >
+              {item.label}
+            </Link>
+          );
+        })}
 
-export default NavbarLanding;
+        <NavbarButton className="w-48">Hubungin Whatsapp</NavbarButton>
+      </MobileNavMenu>
+    </>
+  );
+}

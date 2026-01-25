@@ -1,92 +1,67 @@
 "use client";
+
 import Container from "@/components/container";
 import React, { useState } from "react";
-import faqData from "@/data/faq.json";
 import { FiChevronDown, FiChevronUp } from "react-icons/fi";
 import { AnimatePresence, motion } from "framer-motion";
+import faqData from "@/data/fqa.json";
 
-const FqaContent = () => {
-  const [openQuestion, setOpenQuestion] = useState<string | null>(null);
-
-  const handleToggle = (question: string) => {
-    setOpenQuestion((prev) => (prev === question ? null : question));
-  };
+const FAQSection = () => {
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section
-      className="relative w-full bg-white dark:bg-slate-900"
-      id="faqContent"
-    >
-      <Container className="relative bg-gray-50 dark:bg-slate-950 rounded-xl overflow-hidden">
-        <div
-          className="absolute inset-0 z-0 dark:hidden"
-          style={{
-            backgroundImage:
-              "repeating-linear-gradient(45deg, transparent, transparent 2px, #f3f4f6 2px, #f3f4f6 4px)",
-          }}
-        />
-        <div className="relative z-10 grid md:grid-cols-5 gap-10 py-10 px-10 lg:py-14 lg:px-10 mx-auto">
-          <div className="md:col-span-2">
-            <div className="max-w-sm space-y-1">
-              <p className="text-md lg:text-lg font-semibold text-primary dark:text-secondary">
-                FAQ
-              </p>
-              <h2 className="text-2xl font-bold md:text-4xl md:leading-tight dark:text-white">
-                Punya Pertanyaan?
-                <br />
-                Berikut jawabannya
-              </h2>
-              <p className="mt-1 hidden md:block text-gray-600 dark:text-neutral-400">
-                Berikut beberapa pertanyaan yang sering ditanyakan pelanggan,
-                beserta jawabannya untuk membantu Anda lebih memahami layanan.
+    <section className="relative bg-gray-50" id="faq">
+      <Container className="py-10">
+        <div className="grid md:grid-cols-2 gap-10">
+          <div className="max-w-xl">
+            <span className="px-4 py-2.5 bg-white border rounded-full text-primary text-sm">
+              FAQ’S
+            </span>
+
+            <h2 className="mt-4 text-2xl lg:text-4xl font-semibold">
+              Pertanyaan dan
+              <span className="text-primary mx-1">Jawaban</span>
+              yang sering ditanyakan
+            </h2>
+
+            <div className="mt-10 space-y-2">
+              <p className="text-sm text-gray-500">Ada pertanyaan lain </p>
+              <p className="text-xl font-semibold text-primary">
+                hello.cs@sentra.com
               </p>
             </div>
           </div>
-          <div className="md:col-span-3">
-            <div className="hs-accordion-group divide-y divide-gray-200 dark:divide-neutral-700">
-              {faqData.map((item, key: React.Key) => {
-                const isOpen = openQuestion === item.question;
-                return (
-                  <div
-                    className="hs-accordion pt-6 pb-3"
-                    id={item.question}
-                    key={key}
+
+          <div className="">
+            {faqData.map((item, index) => {
+              const isOpen = openIndex === index;
+
+              return (
+                <div key={index} className="border-b py-4">
+                  <button
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    className="w-full flex justify-between items-center text-lg text-left font-semibold"
                   >
-                    <button
-                      className="hs-accordion-toggle group pb-3 inline-flex items-center justify-between gap-x-3 w-full md:text-lg font-semibold text-start text-gray-800 rounded-lg transition hover:text-gray-500 focus:outline-hidden focus:text-primary dark:text-neutral-200 dark:hover:text-neutral-400 dark:focus:text-neutral-400"
-                      aria-expanded="false"
-                      aria-controls="hs-basic-with-title-and-arrow-stretched-collapse-two"
-                      onClick={() => {
-                        handleToggle(item.question);
-                      }}
-                    >
-                      {item.question}
-                      {isOpen ? (
-                        <FiChevronUp className="size-5 shrink-0 text-gray-600 dark:text-neutral-400" />
-                      ) : (
-                        <FiChevronDown className="size-5 shrink-0 text-gray-600 dark:text-neutral-400" />
-                      )}
-                    </button>
-                    <AnimatePresence initial={false}>
-                      {isOpen && (
-                        <motion.div
-                          key="content"
-                          initial={{ height: 0, opacity: 0 }}
-                          animate={{ height: "auto", opacity: 1 }}
-                          exit={{ height: 0, opacity: 0 }}
-                          transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="overflow-hidden"
-                        >
-                          <p className="pt-2 text-gray-600 dark:text-neutral-400">
-                            {item.answer}
-                          </p>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
-                  </div>
-                );
-              })}
-            </div>
+                    {item.question}
+                    {isOpen ? <FiChevronUp /> : <FiChevronDown />}
+                  </button>
+
+                  <AnimatePresence>
+                    {isOpen && (
+                      <motion.p
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.25 }}
+                        className="mt-2 text-gray-600"
+                      >
+                        {item.answer}
+                      </motion.p>
+                    )}
+                  </AnimatePresence>
+                </div>
+              );
+            })}
           </div>
         </div>
       </Container>
@@ -94,4 +69,4 @@ const FqaContent = () => {
   );
 };
 
-export default FqaContent;
+export default FAQSection;
