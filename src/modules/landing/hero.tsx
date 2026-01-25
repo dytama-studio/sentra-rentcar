@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 // import { handleToContact } from "@/helpers/globalHelper";
 import { FiArrowRight } from "react-icons/fi";
+import Link from "next/link";
 
 const fadeUp: any = {
   hidden: {
@@ -40,8 +41,8 @@ const HeroSection = () => {
   return (
     <section id="hero" className="lg:mt-1 lg:px-6">
       <div className="bg-gradient-to-br from-white via-indigo-50 to-indigo-300 rounded-none lg:rounded-2xl">
-        <Container className="relative py-10 lg:py-15 z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center mt-20 lg:mt-15">
+        <Container className="relative py-5 lg:py-15 z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center mt-16 lg:mt-15">
             <motion.div
               className="flex flex-col gap-2"
               variants={fadeUp}
@@ -83,12 +84,18 @@ const HeroSection = () => {
               </motion.p>
 
               <div className="mt-8 flex w-full justify-center lg:justify-start gap-4">
-                <button className="px-6 py-3 inline-flex items-center gap-2 rounded-lg text-sm bg-indigo-600 text-white">
+                <Link
+                  href={"/#CarList"}
+                  className="px-6 py-3 inline-flex items-center gap-2 rounded-lg text-sm bg-indigo-600 text-white"
+                >
                   Mulai Cari Mobil <FiArrowRight />
-                </button>
-                <button className="px-6 py-3 rounded-lg text-sm bg-white">
+                </Link>
+                <Link
+                  href={"/#HowToUse"}
+                  className="px-6 py-3 rounded-lg text-sm bg-white"
+                >
                   Cara Sewa Mobil
-                </button>
+                </Link>
               </div>
 
               <motion.div

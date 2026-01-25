@@ -29,7 +29,7 @@ const CarCard = ({ data }: Props) => {
           {data.name}
         </h3>
 
-        <div className="mt-2 grid grid-cols-3 gap-2 text-xs sm:text-sm text-gray-500">
+        <div className="mt-2 grid grid-cols-2 lg:grid-cols-3 gap-2 text-[10px] sm:text-sm text-gray-500">
           <div className="flex items-center gap-1">
             <FaCar /> <span>{data.transmission}</span>
           </div>

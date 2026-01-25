@@ -87,7 +87,7 @@ export const MobileNav = ({
 );
 
 export const MobileNavHeader = ({ children }: { children: ReactNode }) => (
-  <div className="flex items-center justify-between">{children}</div>
+  <div className="flex items-center px-4 justify-between">{children}</div>
 );
 
 export const MobileNavMenu = ({
@@ -112,9 +112,9 @@ export const MobileNavMenu = ({
         <div className="container max-w-screen-xl mx-auto px-5 h-full flex flex-col">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-2 rounded-md bg-gray-100 active:scale-90"
+            className="absolute top-4 right-4 p-2  border border-gray-200 rounded-md bg-white active:scale-90"
           >
-            <FiX></FiX>
+            <FiX className="text-black"></FiX>
           </button>
 
           <div className="flex flex-col items-center justify-center flex-1 gap-6 text-center">
@@ -133,7 +133,10 @@ export const MobileNavToggle = ({
   isOpen: boolean;
   onClick: () => void;
 }) => (
-  <button onClick={onClick} className="p-2 active:scale-90">
+  <button
+    onClick={onClick}
+    className="p-2 active:scale-90 border border-gray-200 rounded-md"
+  >
     {isOpen ? <FiX /> : <FiMenu />}
   </button>
 );
