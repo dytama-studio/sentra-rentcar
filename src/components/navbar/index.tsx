@@ -24,6 +24,8 @@ export default function NavbarLanding() {
     120
   );
 
+  console.log("ini active id", activeId);
+
   useEffect(() => {
     let last = false;
 

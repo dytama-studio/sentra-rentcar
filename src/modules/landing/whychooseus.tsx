@@ -8,7 +8,7 @@ import Bento5 from "./molecules/Bento5";
 
 const WhyChooseUsSection = () => {
   return (
-    <section className="mt-5 lg:mt-10 lg:px-6" id="HowToUse">
+    <section className="mt-5 lg:mt-10 lg:px-6" id="WhyChooseUs">
       <Container className="relative py-10 lg:py-15 z-10">
         <div className="flex w-full justify-center pb-5 lg:pb-10">
           <div className="flex flex-col items-center space-y-3">

@@ -21,7 +21,7 @@ export default function FloatingWhatsApp() {
       aria-label="WhatsApp"
     >
       <Image
-        src="assets/icon/social-media/whatsappcircle.svg"
+        src="assets/img/icon/social-media/whatsappcircle.svg"
         alt="WhatsApp"
         width={60}
         height={60}

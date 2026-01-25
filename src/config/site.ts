@@ -54,10 +54,10 @@ export const siteConfig = {
   },
   navItems: [
     { label: "Beranda", href: "/", haveChild: false },
-    { label: "Mobil Kami", href: "/#CarList", haveChild: false },
-    { label: "Cara Sewa", href: "/#HowToUse", haveChild: false },
-    { label: "Mengapa Sentra", href: "/#WhyChooseUs", haveChild: false },
-    { label: "Testimonials", href: "/#Testimonials", haveChild: false },
-    { label: "Kontak", href: "/Contact", haveChild: false },
+    { label: "Mobil Kami", href: "#CarList", haveChild: false },
+    { label: "Cara Sewa", href: "#HowToUse", haveChild: false },
+    { label: "Mengapa Sentra", href: "#WhyChooseUs", haveChild: false },
+    { label: "Testimonials", href: "#Testimonials", haveChild: false },
+    { label: "Kontak", href: "/contact", haveChild: false },
   ],
 };
