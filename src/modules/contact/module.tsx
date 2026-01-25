@@ -25,7 +25,7 @@ export default function ContactModule() {
               <div className="pt-10 lg:pt-18">
                 <button
                   onClick={handleToContact}
-                  className="mt-6 inline-flex items-center gap-3 bg-gradient-to-t from-gray-900 to bg-gray-800 text-white hover:bg-blue-100 transition-all rounded-full px-5 py-2.5 text-sm font-medium"
+                  className="mt-6 inline-flex items-center gap-3 bg-gradient-to-t from-gray-900 to bg-gray-800 text-white hover:from-indigo-500 hover:to-indigo-700 transition-all rounded-full px-5 py-2.5 text-sm font-medium"
                 >
                   Hubungi Kami
                   <span className="rounded-full bg-primary text-white h-8 w-8 flex items-center justify-center">

@@ -14,33 +14,62 @@ import { NavbarLogo, NavbarButton } from "./navbar-elements";
 import { siteConfig } from "@/config/site";
 import { useScrollSpy } from "@/hooks/useColorSpy";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function NavbarLanding() {
+  const pathname = usePathname();
+
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [activeId, setActiveId] = useState<string>("home");
 
-  const activeId = useScrollSpy(
-    siteConfig.navItems.map((i) => i.href.replace("#", "")),
+  const isHome = pathname === "/";
+
+  // ScrollSpy ONLY for home page
+  const scrollActiveId = useScrollSpy(
+    isHome
+      ? siteConfig.navItems
+          .filter((i) => i.href.startsWith("#"))
+          .map((i) => i.href.replace("#", ""))
+      : [],
     120
   );
 
-  console.log("ini active id", activeId);
-
+  // Scroll effect
   useEffect(() => {
-    let last = false;
-
     const onScroll = () => {
-      const next = window.scrollY > 10;
-      if (next !== last) {
-        last = next;
-        setIsScrolled(next);
+      setIsScrolled(window.scrollY > 10);
+
+      if (isHome && window.scrollY < 100) {
+        setActiveId("home");
       }
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
 
+  // URL change handler
+  useEffect(() => {
+    if (!isHome) {
+      setActiveId(pathname.replace("/", ""));
+      return;
+    }
+
+    const hash = window.location.hash.replace("#", "");
+    if (hash) {
+      setActiveId(hash);
+    }
+  }, [pathname, isHome]);
+
+  // ScrollSpy active (home only)
+  useEffect(() => {
+    if (scrollActiveId) {
+      setActiveId(scrollActiveId);
+    }
+  }, [scrollActiveId]);
+
+  // Lock body scroll
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? "hidden" : "";
     return () => {
@@ -54,6 +83,7 @@ export default function NavbarLanding() {
         <NavBody isScrolled={isScrolled}>
           <NavbarLogo />
           <NavItems items={siteConfig.navItems} activeId={activeId} />
+
           <div className="hidden md:flex gap-4 items-center">
             <NavbarButton>Hubungi Whatsapp</NavbarButton>
           </div>
@@ -69,21 +99,26 @@ export default function NavbarLanding() {
           </MobileNavHeader>
         </MobileNav>
       </Navbar>
-      <MobileNavMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
-        {siteConfig.navItems.map((item) => {
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              onClick={() => setIsMenuOpen(false)}
-              className="text-lg font-medium"
-            >
-              {item.label}
-            </Link>
-          );
-        })}
 
-        <NavbarButton className="w-48">Hubungin Whatsapp</NavbarButton>
+      <MobileNavMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)}>
+        {siteConfig.navItems.map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            onClick={() => {
+              if (item.href === "/") setActiveId("home");
+              else if (item.href.startsWith("#"))
+                setActiveId(item.href.replace("#", ""));
+              else setActiveId(item.href.replace("/", ""));
+              setIsMenuOpen(false);
+            }}
+            className="text-lg font-medium"
+          >
+            {item.label}
+          </Link>
+        ))}
+
+        <NavbarButton className="w-48">Hubungi Whatsapp</NavbarButton>
       </MobileNavMenu>
     </>
   );

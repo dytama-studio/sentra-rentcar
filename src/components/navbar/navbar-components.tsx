@@ -50,7 +50,13 @@ export const NavItems = ({
   return (
     <div className="hidden md:flex gap-5 items-center">
       {items.map((item) => {
-        const isActive = item.href === `#${activeId}`;
+        let key = "";
+
+        if (item.href === "/") key = "home";
+        else if (item.href.startsWith("#")) key = item.href.replace("#", "");
+        else key = item.href.replace("/", "");
+
+        const isActive = key === activeId;
 
         return (
           <Link
@@ -68,7 +74,6 @@ export const NavItems = ({
     </div>
   );
 };
-
 export const MobileNav = ({
   children,
   isScrolled,

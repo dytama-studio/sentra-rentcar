@@ -5,9 +5,10 @@ import { FaBriefcase, FaCar, FaUsers } from "react-icons/fa";
 
 interface Props {
   data: CarCardType;
+  handleOpenModal: () => void;
 }
 
-const CarCard = ({ data }: Props) => {
+const CarCard = ({ data, handleOpenModal }: Props) => {
   return (
     <div className="w-full rounded-2xl bg-white overflow-hidden">
       <div className="relative p-3 bg-zinc-50 rounded-2xl">
@@ -49,7 +50,10 @@ const CarCard = ({ data }: Props) => {
               <span className="text-xs sm:text-sm font-normal">/Hari</span>
             </p>
 
-            <button className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-medium px-3 py-2 rounded-full transition">
+            <button
+              onClick={handleOpenModal}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-medium px-3 py-2 rounded-full transition"
+            >
               Sewa Sekarang
             </button>
           </div>

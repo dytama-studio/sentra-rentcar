@@ -5,13 +5,27 @@ import { useLanding } from "./action/uselanding.action";
 import { carList } from "./mockdata";
 import CarCard from "./molecules/CarCard";
 import Link from "next/link";
+import ModalRentCar from "./modal/ModalRentCar";
 import { FiArrowUpRight } from "react-icons/fi";
 
 const CarSection = () => {
-  const { handleChangeTab, tabs, tabActive } = useLanding();
+  const {
+    handleChangeTab,
+    tabs,
+    tabActive,
+    openModalBook,
+    handleOpenModalBook,
+  } = useLanding();
+
+  const onSubmit = (values: any) => {};
 
   return (
     <section className="relative justify-center mt-5 lg:mt-10" id="CarList">
+      <ModalRentCar
+        isOpen={openModalBook}
+        handleClose={handleOpenModalBook}
+        onSubmit={onSubmit}
+      />
       <Container>
         <div className="flex flex-col lg:flex-row w-full justify-start lg:justify-between">
           <div className="flex flex-col">
@@ -72,7 +86,13 @@ const CarSection = () => {
         </div>
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 mt-5 lg:mt-10">
           {carList.map((item, key) => {
-            return <CarCard key={key} data={item} />;
+            return (
+              <CarCard
+                key={key}
+                data={item}
+                handleOpenModal={handleOpenModalBook}
+              />
+            );
           })}
         </div>
         <div className="pt-5 flex w-full justify-center">

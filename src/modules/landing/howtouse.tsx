@@ -1,12 +1,19 @@
 import Container from "@/components/container";
-import React from "react";
+import React, { useState } from "react";
 import { howToUseData } from "./mockdata";
-import Link from "next/link";
 import { FiArrowUpRight } from "react-icons/fi";
+import ModalDetail from "./modal/ModalDetail";
 
 const HowToUseSection = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpen = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <section className="mt-5 lg:mt-10 lg:px-6" id="HowToUse">
+      <ModalDetail isOpen={isOpen} handleClose={handleOpen} />
       <div className="bg-indigo-50 rounded-none lg:rounded-2xl">
         <Container className="relative py-10 lg:py-15 z-10">
           <div className="flex w-full justify-center">
@@ -62,15 +69,15 @@ const HowToUseSection = () => {
               })}
             </ol>
             <div className="pt-5 lg:pt-10 flex w-full justify-center">
-              <Link
-                href={"/"}
+              <button
+                onClick={handleOpen}
                 className="flex items-center gap-2 text-primary hover:text-indigo-800 text-md font-semibold"
               >
                 Lihat Syarat dan Ketentuan
                 <span className="bg-indigo-100 text-primary text-sm font-medium px-2 py-2 rounded-full">
                   <FiArrowUpRight />
                 </span>
-              </Link>
+              </button>
             </div>
           </div>
         </Container>
