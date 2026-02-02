@@ -1,5 +1,5 @@
 import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
-import { role, genderEnum } from "../enum";
+import { role, genderEnum } from "../../enum";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -9,9 +9,9 @@ export const user = pgTable("user", {
   email: text("email").notNull().unique(),
   emailVerified: boolean("emailVerified").notNull(),
   image: text("image"),
-  role: role("role").default("user").notNull(),
+  role: role("role").default("user").notNull(), // global role (system)
   gender: genderEnum("gender"),
-  isActive: boolean("isActive").notNull().default(false),
+  isActive: boolean("isActive").default(true),
   createdAt: timestamp("createdAt").defaultNow(),
   updatedAt: timestamp("updatedAt")
     .defaultNow()
