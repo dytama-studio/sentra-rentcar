@@ -62,6 +62,7 @@
     "next-auth": "^4.24.11",
     "next-themes": "^0.4.6",
     "nextjs-toploader": "^3.8.16",
+    "nodemailer": "^8.0.0",
     "nuqs": "^2.6.0",
     "postgres": "^3.4.7",
     "react": "^18.2.0",
@@ -84,6 +85,7 @@
   "devDependencies": {
     "@types/aos": "^3.0.7",
     "@types/node": "^20",
+    "@types/nodemailer": "^7.0.9",
     "@types/react": "^18.2.65",
     "@types/react-date-range": "^1.4.10",
     "@types/react-dom": "^18.2.18",

@@ -15,3 +15,7 @@ export type UserSignUp = {
   email: string;
   password: string;
 };
+
+export type ForgetPasswordValues = {
+  email: string;
+};

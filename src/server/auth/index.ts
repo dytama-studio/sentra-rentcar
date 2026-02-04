@@ -4,11 +4,28 @@ import { openAPI, admin } from "better-auth/plugins";
 import { headers } from "next/headers";
 import { cache } from "react";
 import { db } from "../database";
+import { transporter } from "./mailer";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: "pg",
   }),
+  emailAndPassword: {
+    enabled: true,
+    autoSignIn: false,
+    sendResetPassword: async ({ user, url }: any) => {
+      await transporter.sendMail({
+        to: user.email,
+        subject: "Reset Password Sentra Rent",
+        html: `
+          <p>Halo ${user.name ?? "User"},</p>
+          <p>Klik link berikut untuk reset password:</p>
+          <a href="${url}">${url}</a>
+          <p>Link berlaku beberapa menit.</p>
+        `,
+      });
+    },
+  },
   plugins: [
     openAPI(), // /api/auth/reference
     admin({
@@ -26,10 +43,6 @@ export const auth = betterAuth({
   rateLimit: {
     window: 60, // time window in seconds
     max: 5, // max requests in the window
-  },
-  emailAndPassword: {
-    enabled: true,
-    autoSignIn: false,
   },
 } satisfies BetterAuthOptions);
 

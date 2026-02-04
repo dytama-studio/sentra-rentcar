@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import "../styles/globals.css";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/font";
-import Script from "next/script";
 import NextTopLoader from "nextjs-toploader";
 import { Providers } from "@/providers";
 import { ToastContainer } from "react-toastify";
@@ -55,30 +54,16 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link
-          rel="icon"
-          type="image/png"
-          href="/assets/img/brand/dytama-icon.svg"
-        />
         <link rel="icon" href="/favicon.ico" type="image/x-icon"></link>
         <meta
           name="google-site-verification"
           content="V2tw24D7BGzXxwKq3BKCcfmZkRaOq1uCMVM74x0o4JU"
         />
         <link rel="icon" href="/favicon.ico" type="image/x-icon"></link>
-        <Script id="gtm-script" strategy="lazyOnload">
-          {`
-          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-          new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-          j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-          'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-          })(window,document,'script','dataLayer','GTM-WWF8K3WZ');
-        `}
-        </Script>
       </head>
       <body className={fontSans.className}>
         <NextTopLoader
-          color="#D1F701"
+          color="#4338CA"
           initialPosition={0.08}
           crawlSpeed={200}
           height={3}

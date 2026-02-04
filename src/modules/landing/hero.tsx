@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 // import { handleToContact } from "@/helpers/globalHelper";
 import { FiArrowRight } from "react-icons/fi";
 import Link from "next/link";
+import AnimatedTextWrapper from "@/components/textgenerate/AnimatedTextWrapper";
 
 const fadeUp: any = {
   hidden: {
@@ -64,15 +65,17 @@ const HeroSection = () => {
                 </div>
               </div>
 
-              <div className="flex flex-col space-y-0 text-3xl md:text-4xl lg:text-6xl font-semibold text-center lg:text-start leading-tight md:leading-snug lg:leading-tight text-black">
-                <h2 className="">Cara Praktis</h2>
-                <h2 className="">
-                  <span data-no-animate className="me-2 text-primary">
-                    Sewa Mobil
-                  </span>
-                  Untuk Kebutuhan Harian
-                </h2>
-              </div>
+              <AnimatedTextWrapper>
+                <div className="flex flex-col space-y-0 text-3xl md:text-4xl lg:text-6xl font-semibold text-center lg:text-start leading-tight md:leading-snug lg:leading-tight text-black">
+                  <h2 className="">Cara Praktis</h2>
+                  <h2 className="">
+                    <span data-no-animate className="me-2 text-primary">
+                      Sewa Mobil
+                    </span>
+                    Untuk Kebutuhan Harian
+                  </h2>
+                </div>
+              </AnimatedTextWrapper>
 
               <motion.p
                 variants={fadeUp}
@@ -86,13 +89,13 @@ const HeroSection = () => {
               <div className="mt-8 flex w-full justify-center lg:justify-start gap-4">
                 <Link
                   href={"/#CarList"}
-                  className="px-6 py-3 inline-flex items-center gap-2 rounded-lg text-sm bg-indigo-600 text-white"
+                  className="px-6 py-3 inline-flex items-center gap-2 rounded-lg text-sm bg-primary hover:bg-indigo-500 text-white"
                 >
                   Mulai Cari Mobil <FiArrowRight />
                 </Link>
                 <Link
                   href={"/#HowToUse"}
-                  className="px-6 py-3 rounded-lg text-sm bg-white"
+                  className="px-6 py-3 rounded-lg text-sm bg-white hover:bg-gray-50"
                 >
                   Cara Sewa Mobil
                 </Link>

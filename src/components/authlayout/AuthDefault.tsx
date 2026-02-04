@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react";
-import Image from "next/image";
 
 interface Props {
   children: ReactNode;
@@ -9,39 +8,25 @@ const AuthDefault = ({ children }: Props) => {
   return (
     <div className="relative flex content-center h-full w-full bg-white lg:w-full lg:px-8 lg:pt-0 xl:h-[100vh] xl:px-0">
       <div className="hidden lg:w-2/5 lg:block">
-        <div className="relative bg-[url(/assets/img/illustration/card-footer-2.svg)] bg-no-repeat bg-center bg-cover h-full">
-          <div className="flex justify-center content-center">
-            <div className="mt-[10vh] px-28 ">
-              <div className="flex w-full justify-center">
-                <div className="flex flex-col space-y-2 text-center">
-                  <h3 className="text-4xl font-bold text-white">
-                    Hi, Welcome Back
-                  </h3>
-                  <p className="text-sm font-base text-white">
-                    More effectively with optimized workflows.
-                  </p>
-                </div>
-              </div>
+        <div className="p-4 h-full">
+          <div
+            className="relative h-full rounded-xl overflow-hidden
+      bg-[url(/assets/img/illustration/auth-background.png)]
+      bg-cover bg-center bg-no-repeat"
+          >
+            {/* Overlay gradient */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
 
-              <div className="flex w-full justify-center content-center space-y-2 text-center">
-                <Image
-                  src={"/assets/img/illustration/medit.png"}
-                  alt="background_auth"
-                  className="w-400 h-400 lg:h-500 lg:w-400 pt-10"
-                  width={300}
-                  height={300}
-                />
-              </div>
-              <div className="lg:pt-10 flex w-full justify-center">
-                <div className="flex flex-col space-y-2 text-center">
-                  <h3 className="text-3xl font-semibold text-white">
-                    Automate, your workflow
-                  </h3>
-                  <p className="text-sm font-base text-white">
-                    Empower your team to streamline task and automate process
-                  </p>
-                </div>
-              </div>
+            {/* Text content */}
+            <div className="absolute bottom-0 z-10 p-8 text-white">
+              <h2 className="text-5xl font-semibold leading-tight">
+                Panel Manajemen Rental Mobil
+              </h2>
+
+              <p className="mt-3 text-base leading-relaxed text-white/90 max-w-xl">
+                Akses sistem untuk mengelola armada, transaksi, dan laporan
+                operasional secara efisien.
+              </p>
             </div>
           </div>
         </div>

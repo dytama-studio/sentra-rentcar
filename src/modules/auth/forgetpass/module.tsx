@@ -11,35 +11,33 @@ import {
   UseFormSetValue,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/entities/auth";
-import { UserLogin } from "@/interface/auth";
+import { ForgetSchema } from "@/entities/auth";
+import { ForgetPasswordValues } from "@/interface/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
 import InputText from "@/components/inputs/InputText";
-import InputPassword from "@/components/inputs/InputPassword";
 // import bcrypt from "bcryptjs";
 
 interface Props {
-  onSubmit: SubmitHandler<UserLogin>;
+  onSubmit: SubmitHandler<ForgetPasswordValues>;
   errorMsg: string;
   onLoading: boolean;
 }
 
-export type SignInFormRefType = {
-  setError: UseFormSetError<UserLogin>;
-  setValue: UseFormSetValue<UserLogin>;
+export type ForgetPasswordFormRefType = {
+  setError: UseFormSetError<ForgetPasswordValues>;
+  setValue: UseFormSetValue<ForgetPasswordValues>;
 };
 
-const SignInModule: ForwardRefRenderFunction<SignInFormRefType, Props> = (
-  { onSubmit, errorMsg, onLoading },
-  ref
-) => {
+const ForgetPasswordModule: ForwardRefRenderFunction<
+  ForgetPasswordFormRefType,
+  Props
+> = ({ onSubmit, errorMsg, onLoading }, ref) => {
   const { handleSubmit, control, setError, setValue } = useForm({
-    resolver: zodResolver(LoginSchema),
+    resolver: zodResolver(ForgetSchema),
     defaultValues: {
       email: "",
-      password: "",
     },
   });
 
@@ -85,7 +83,7 @@ const SignInModule: ForwardRefRenderFunction<SignInFormRefType, Props> = (
           className="inline-flex text-xs lg:text-sm items-center gap-2 font-normal text-black hover:text-primary hover:font-bold"
         >
           <FiArrowLeft />
-          Back to Landing
+          Back to Signin
         </Link>
       </div>
 
@@ -94,10 +92,11 @@ const SignInModule: ForwardRefRenderFunction<SignInFormRefType, Props> = (
           <div className="text-center space-y-3">
             <div className="flex flex-col space-y-2 pt-5">
               <h4 className="text-2xl lg:text-3xl text-black font-bold">
-                Selamat Datang
+                Lupa Password
               </h4>
               <p className="text-gray-500 text-xs lg:text-sm font-normal">
-                Masukkan email dan akun yang terdaftar untuk akses admin panel
+                Silahkan masukan email yang terdaftar pada sistem manajemen
+                rental
               </p>
             </div>
           </div>
@@ -124,20 +123,6 @@ const SignInModule: ForwardRefRenderFunction<SignInFormRefType, Props> = (
                 placeholder="Masukkan email anda"
                 control={control}
               />
-              <InputPassword
-                name="password"
-                label="Password"
-                placeholder="password"
-                control={control}
-              />
-              <div className="flex w-full justify-end">
-                <Link
-                  href={"/forget-password"}
-                  className="font-normal text-sm text-indigo-700"
-                >
-                  Lupa password ?
-                </Link>
-              </div>
 
               <button
                 type="submit"
@@ -163,10 +148,10 @@ const SignInModule: ForwardRefRenderFunction<SignInFormRefType, Props> = (
                         fill="currentColor"
                       />
                     </svg>
-                    Signing...
+                    Mengirim...
                   </>
                 ) : (
-                  "Masuk"
+                  "Lupa Password"
                 )}
               </button>
             </div>
@@ -177,4 +162,4 @@ const SignInModule: ForwardRefRenderFunction<SignInFormRefType, Props> = (
   );
 };
 
-export default forwardRef(SignInModule);
+export default forwardRef(ForgetPasswordModule);
