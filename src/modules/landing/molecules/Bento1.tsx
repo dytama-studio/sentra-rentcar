@@ -35,8 +35,8 @@ const Bento1 = () => {
         <Image
           src="/assets/img/illustration/services-1.png"
           alt="Hero Person"
-          width={220}
-          height={520}
+          width={800}
+          height={1000}
           className="w-full select-none"
         />
       </div>

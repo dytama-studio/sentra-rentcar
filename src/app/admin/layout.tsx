@@ -6,9 +6,5 @@ type Props = {
 };
 
 export default async function LayoutAdmin({ children }: Props) {
-  return (
-    <AdminPageLayout>
-      <div className="dark:bg-boxdark-2 dark:text-bodydark">{children}</div>
-    </AdminPageLayout>
-  );
+  return <AdminPageLayout>{children}</AdminPageLayout>;
 }

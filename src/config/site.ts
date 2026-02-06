@@ -4,9 +4,11 @@ export const siteConfig = {
   name: "Sentra Rent Car",
   description:
     "Sentra Rent Car adalah tempat penyewaan mobil terkemukan di depok jawa barat.",
-  ogImage: "/assets/img/brand/dytama-logo.png",
+  ogImage: "https://nextui.org/twitter-cards/nextui.jpeg",
   author: "Dytama Studio",
   keywords: ["Rental Mobil Depok", "Rental Mobil", "Sewa Avanza"],
+  imgUrl: "/assets/img/brand/sentra-color.png",
+  imgUrl_white: "/assets/img/brand/sentra-color.png",
   email: process.env.NEXT_PUBLIC_EMAIL || "",
   address: process.env.NEXT_PUBLIC_ADDRESS || "",
   phone: process.env.NEXT_PUBLIC_PHONE || "",

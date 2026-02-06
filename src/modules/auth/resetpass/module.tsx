@@ -11,75 +11,52 @@ import {
   UseFormSetValue,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { LoginSchema } from "@/entities/auth";
-import { UserLogin } from "@/interface/auth";
+import { ResetPasswordSchema } from "@/entities/auth";
+import { ResetPasswordValues } from "@/interface/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
-import InputText from "@/components/inputs/InputText";
 import InputPassword from "@/components/inputs/InputPassword";
 // import bcrypt from "bcryptjs";
 
 interface Props {
-  onSubmit: SubmitHandler<UserLogin>;
+  onSubmit: SubmitHandler<ResetPasswordValues>;
   errorMsg: string;
   onLoading: boolean;
 }
 
-export type SignInFormRefType = {
-  setError: UseFormSetError<UserLogin>;
-  setValue: UseFormSetValue<UserLogin>;
+export type ResetPasswordFormRefType = {
+  setError: UseFormSetError<ResetPasswordValues>;
+  setValue: UseFormSetValue<ResetPasswordValues>;
 };
 
-const SignInModule: ForwardRefRenderFunction<SignInFormRefType, Props> = (
-  { onSubmit, errorMsg, onLoading },
-  ref
-) => {
+const ResetPasswordModule: ForwardRefRenderFunction<
+  ResetPasswordFormRefType,
+  Props
+> = ({ onSubmit, errorMsg, onLoading }, ref) => {
   const { handleSubmit, control, setError, setValue } = useForm({
-    resolver: zodResolver(LoginSchema),
+    resolver: zodResolver(ResetPasswordSchema),
     defaultValues: {
-      email: "",
       password: "",
+      confirmPassword: "",
     },
   });
-
-  // const checkPass = async () => {
-  //   const plainPassword = "admin480!";
-  //   const hashedPasswordFromDB =
-  //     "$2b$10$JwwCXP8Dl0s6yuDyC0AcNuu0zQNJBhZtddNzSLPO52uzv0XPS5z.e"; // isi dari tabel account.password
-
-  //   const isMatch = await bcrypt.compare(plainPassword, hashedPasswordFromDB);
-
-  //   if (isMatch) {
-  //     console.log("Password benar!");
-  //   } else {
-  //     console.log("Password salah!");
-  //   }
-  // };
 
   useImperativeHandle(ref, () => ({
     setError,
     setValue,
   }));
 
-  // useEffect(() => {
-  //   checkPass();
-  // }, []);
-
   return (
     <div className="mb-16 w-full lg:px-16 ">
       <div className="flex w-full justify-between items-center pt-10 lg:pt-10">
-        <div className="flex flex-row gap-2 items-center">
-          <Image
-            src={"/assets/img/brand/sentra-color.svg"}
-            alt="background_auth"
-            className="w-10 h-auto lg:h-auto lg:w-10"
-            width={100}
-            height={100}
-          />
-          <p className="text-base text-black font-semibold">Sentra Rent Car</p>
-        </div>
-
+        <Image
+          src={"/assets/img/brand/dytama-black.svg"}
+          alt="background_auth"
+          className="w-400 h-400 lg:h-200 lg:w-200 pt-10"
+          width={100}
+          height={100}
+        />
         <Link
           href={"/"}
           className="inline-flex text-xs lg:text-sm items-center gap-2 font-normal text-black hover:text-primary hover:font-bold"
@@ -94,10 +71,10 @@ const SignInModule: ForwardRefRenderFunction<SignInFormRefType, Props> = (
           <div className="text-center space-y-3">
             <div className="flex flex-col space-y-2 pt-5">
               <h4 className="text-2xl lg:text-3xl text-black font-bold">
-                Selamat Datang
+                Reset Password
               </h4>
               <p className="text-gray-500 text-xs lg:text-sm font-normal">
-                Masukkan email dan akun yang terdaftar untuk akses admin panel
+                Silahkan masukan password baru anda
               </p>
             </div>
           </div>
@@ -118,26 +95,18 @@ const SignInModule: ForwardRefRenderFunction<SignInFormRefType, Props> = (
           )}
           <form className="py-5 lg:py-5" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-y-4">
-              <InputText
-                name="email"
-                label="Email"
-                placeholder="Masukkan email anda"
-                control={control}
-              />
               <InputPassword
                 name="password"
                 label="Password"
                 placeholder="password"
                 control={control}
               />
-              <div className="flex w-full justify-end">
-                <Link
-                  href={"/forget-password"}
-                  className="font-normal text-sm text-indigo-700"
-                >
-                  Lupa password ?
-                </Link>
-              </div>
+              <InputPassword
+                name="confirmPassword"
+                label="Ulangi Password"
+                placeholder="Ulangi Password"
+                control={control}
+              />
 
               <button
                 type="submit"
@@ -163,10 +132,10 @@ const SignInModule: ForwardRefRenderFunction<SignInFormRefType, Props> = (
                         fill="currentColor"
                       />
                     </svg>
-                    Signing...
+                    Mengirim...
                   </>
                 ) : (
-                  "Masuk"
+                  "Lupa Password"
                 )}
               </button>
             </div>
@@ -177,4 +146,4 @@ const SignInModule: ForwardRefRenderFunction<SignInFormRefType, Props> = (
   );
 };
 
-export default forwardRef(SignInModule);
+export default forwardRef(ResetPasswordModule);

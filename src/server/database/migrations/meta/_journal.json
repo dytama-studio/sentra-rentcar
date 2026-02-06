@@ -5,71 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1756820839199,
-      "tag": "0000_deep_mister_fear",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1757081988802,
-      "tag": "0001_lean_maverick",
-      "breakpoints": true
-    },
-    {
-      "idx": 2,
-      "version": "7",
-      "when": 1757130344543,
-      "tag": "0002_fancy_dragon_lord",
-      "breakpoints": true
-    },
-    {
-      "idx": 3,
-      "version": "7",
-      "when": 1757254709662,
-      "tag": "0003_premium_boom_boom",
-      "breakpoints": true
-    },
-    {
-      "idx": 4,
-      "version": "7",
-      "when": 1757260741272,
-      "tag": "0004_good_firebird",
-      "breakpoints": true
-    },
-    {
-      "idx": 5,
-      "version": "7",
-      "when": 1757265993952,
-      "tag": "0005_aromatic_union_jack",
-      "breakpoints": true
-    },
-    {
-      "idx": 6,
-      "version": "7",
-      "when": 1757519842192,
-      "tag": "0006_dusty_galactus",
-      "breakpoints": true
-    },
-    {
-      "idx": 7,
-      "version": "7",
-      "when": 1757777819014,
-      "tag": "0007_brown_scarlet_spider",
-      "breakpoints": true
-    },
-    {
-      "idx": 8,
-      "version": "7",
-      "when": 1757822233744,
-      "tag": "0008_cold_bastion",
-      "breakpoints": true
-    },
-    {
-      "idx": 9,
-      "version": "7",
-      "when": 1758122390183,
-      "tag": "0009_known_preak",
+      "when": 1769444802275,
+      "tag": "0000_common_mole_man",
       "breakpoints": true
     }
   ]
