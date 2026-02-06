@@ -11,33 +11,34 @@ import {
   UseFormSetValue,
 } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ForgetSchema } from "@/entities/auth";
-import { ForgetPasswordValues } from "@/interface/auth";
+import { ResetPasswordSchema } from "@/entities/auth";
+import { ResetPasswordValues } from "@/interface/auth";
 import Image from "next/image";
 import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
-import InputText from "@/components/inputs/InputText";
+import InputPassword from "@/components/inputs/InputPassword";
 // import bcrypt from "bcryptjs";
 
 interface Props {
-  onSubmit: SubmitHandler<ForgetPasswordValues>;
+  onSubmit: SubmitHandler<ResetPasswordValues>;
   errorMsg: string;
   onLoading: boolean;
 }
 
-export type ForgetPasswordFormRefType = {
-  setError: UseFormSetError<ForgetPasswordValues>;
-  setValue: UseFormSetValue<ForgetPasswordValues>;
+export type ResetPasswordFormRefType = {
+  setError: UseFormSetError<ResetPasswordValues>;
+  setValue: UseFormSetValue<ResetPasswordValues>;
 };
 
-const ForgetPasswordModule: ForwardRefRenderFunction<
-  ForgetPasswordFormRefType,
+const ResetPasswordModule: ForwardRefRenderFunction<
+  ResetPasswordFormRefType,
   Props
 > = ({ onSubmit, errorMsg, onLoading }, ref) => {
   const { handleSubmit, control, setError, setValue } = useForm({
-    resolver: zodResolver(ForgetSchema),
+    resolver: zodResolver(ResetPasswordSchema),
     defaultValues: {
-      email: "",
+      password: "",
+      confirmPassword: "",
     },
   });
 
@@ -49,23 +50,19 @@ const ForgetPasswordModule: ForwardRefRenderFunction<
   return (
     <div className="mb-16 w-full lg:px-16 ">
       <div className="flex w-full justify-between items-center pt-10 lg:pt-10">
-        <div className="flex flex-row gap-2 items-center">
-          <Image
-            src={"/assets/img/brand/sentra-color.svg"}
-            alt="background_auth"
-            className="w-10 h-auto lg:h-auto lg:w-10"
-            width={100}
-            height={100}
-          />
-          <p className="text-base text-black font-semibold">Sentra Rent Car</p>
-        </div>
-
+        <Image
+          src={"/assets/img/brand/dytama-black.svg"}
+          alt="background_auth"
+          className="w-400 h-400 lg:h-200 lg:w-200 pt-10"
+          width={100}
+          height={100}
+        />
         <Link
-          href={"/signin"}
+          href={"/"}
           className="inline-flex text-xs lg:text-sm items-center gap-2 font-normal text-black hover:text-primary hover:font-bold"
         >
           <FiArrowLeft />
-          Back to Login
+          Back to Landing
         </Link>
       </div>
 
@@ -74,11 +71,10 @@ const ForgetPasswordModule: ForwardRefRenderFunction<
           <div className="text-center space-y-3">
             <div className="flex flex-col space-y-2 pt-5">
               <h4 className="text-2xl lg:text-3xl text-black font-bold">
-                Lupa Password
+                Reset Password
               </h4>
               <p className="text-gray-500 text-xs lg:text-sm font-normal">
-                Silahkan masukan email yang terdaftar pada sistem manajemen
-                rental
+                Silahkan masukan password baru anda
               </p>
             </div>
           </div>
@@ -99,10 +95,16 @@ const ForgetPasswordModule: ForwardRefRenderFunction<
           )}
           <form className="py-5 lg:py-5" onSubmit={handleSubmit(onSubmit)}>
             <div className="grid gap-y-4">
-              <InputText
-                name="email"
-                label="Email"
-                placeholder="Masukkan email anda"
+              <InputPassword
+                name="password"
+                label="Password"
+                placeholder="password"
+                control={control}
+              />
+              <InputPassword
+                name="confirmPassword"
+                label="Ulangi Password"
+                placeholder="Ulangi Password"
                 control={control}
               />
 
@@ -144,4 +146,4 @@ const ForgetPasswordModule: ForwardRefRenderFunction<
   );
 };
 
-export default forwardRef(ForgetPasswordModule);
+export default forwardRef(ResetPasswordModule);

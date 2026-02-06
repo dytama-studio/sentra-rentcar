@@ -1,0 +1,19 @@
+{
+  "crons": [
+    {
+      "path": "/api/keep-alive",
+      "schedule": "0 */8 * * *"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/keep-alive",
+      "headers": [
+        {
+          "key": "Authorization",
+          "value": "Bearer ${KEEP_ALIVE_SECRET}"
+        }
+      ]
+    }
+  ]
+}

@@ -19,3 +19,8 @@ export type UserSignUp = {
 export type ForgetPasswordValues = {
   email: string;
 };
+
+export type ResetPasswordValues = {
+  password: string;
+  confirmPassword: string;
+};

@@ -14,15 +14,17 @@ export const Navbar = ({
 }) => (
   <nav
     className={cn(
-      "fixed top-0 z-50 w-full",
+      "fixed top-0 left-0 z-50 w-full",
+      "min-h-[72px]", // ⬅️ PENTING
       "transition-[background-color] duration-300",
       isScrolled ? "bg-white/80 backdrop-blur-md" : "bg-transparent"
     )}
   >
-    <div className="container mx-auto px-1 lg:px-12">{children}</div>
+    <div className="container mx-auto h-full px-1 lg:px-12 flex items-center">
+      {children}
+    </div>
   </nav>
 );
-
 export const NavBody = ({
   children,
   isScrolled,
