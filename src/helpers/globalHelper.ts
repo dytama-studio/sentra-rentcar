@@ -1,4 +1,5 @@
 import { TMetaItem, TMetaResponse } from "@/entities/meta";
+import crypto from "crypto";
 
 export const handleToContact = () => {
   window.open(
@@ -61,4 +62,14 @@ export function capitalizeEachWord(text: string): string {
     .split(" ")
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(" ");
+}
+
+export function hashPassword(password: string) {
+  const salt = crypto.randomBytes(16).toString("hex");
+
+  const hash = crypto
+    .pbkdf2Sync(password, salt, 100000, 32, "sha256")
+    .toString("hex");
+
+  return `${hash}:${salt}`;
 }

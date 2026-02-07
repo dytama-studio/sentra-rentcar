@@ -1,5 +1,5 @@
 {
-  "id": "72ae3fd6-ff2c-42cc-81f0-1a537c45da28",
+  "id": "e45e9e52-1685-449c-95e2-1822342a1a8a",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -14,6 +14,12 @@
           "primaryKey": true,
           "notNull": true
         },
+        "userId": {
+          "name": "userId",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
         "accountId": {
           "name": "accountId",
           "type": "text",
@@ -26,8 +32,8 @@
           "primaryKey": false,
           "notNull": true
         },
-        "userId": {
-          "name": "userId",
+        "providerAccountId": {
+          "name": "providerAccountId",
           "type": "text",
           "primaryKey": false,
           "notNull": true

@@ -1,7 +1,7 @@
 import "dotenv/config";
-import bcrypt from "bcryptjs";
 import { nanoid } from "nanoid";
 import { db } from "./connection";
+import { hashPassword } from "@/helpers/globalHelper";
 
 import {
   user,
@@ -13,7 +13,7 @@ import {
 
 async function seed() {
   console.log("🌱 Seeding database...");
-  console.log("DATABASE_URL:", process.env.DATABASE_URL);
+
   // =========================
   // 1. ORGANIZATION
   // =========================
@@ -34,7 +34,8 @@ async function seed() {
   // 2. USER (ADMIN)
   // =========================
   const userId = nanoid();
-  const hashedPassword = await bcrypt.hash("admin480", 10);
+
+  const hashedPassword = hashPassword("admin480");
 
   await db.insert(user).values({
     id: userId,
@@ -50,13 +51,14 @@ async function seed() {
   // =========================
   // 3. ACCOUNT (EMAIL + PASSWORD)
   // =========================
+  // ✓ FIXED: Sesuai dengan Better Auth schema
   await db.insert(account).values({
     id: nanoid(),
     userId,
-    providerId: "credentials",
-    accountId: "admin@gmail.com",
+    accountId: userId,
+    providerId: "credential",
+    providerAccountId: userId,
     password: hashedPassword,
-    createdAt: new Date(),
   });
 
   console.log("✅ Account credentials created");

@@ -2,9 +2,10 @@ CREATE TYPE "public"."gender" AS ENUM('male', 'female');--> statement-breakpoint
 CREATE TYPE "public"."role" AS ENUM('owner', 'admin', 'user');--> statement-breakpoint
 CREATE TABLE "account" (
 	"id" text PRIMARY KEY NOT NULL,
+	"userId" text NOT NULL,
 	"accountId" text NOT NULL,
 	"providerId" text NOT NULL,
-	"userId" text NOT NULL,
+	"providerAccountId" text NOT NULL,
 	"accessToken" text,
 	"refreshToken" text,
 	"idToken" text,

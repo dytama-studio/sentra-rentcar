@@ -7,12 +7,21 @@ import { db } from "../database";
 import { transporter } from "./mailer";
 
 export const auth = betterAuth({
+  // ← TAMBAH
+  appName: "Sentra Rent",
+  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
+  secret: process.env.BETTER_AUTH_SECRET || "",
+  trustedOrigins: ["http://localhost:3000", "http://localhost:3001"],
+  // ↑ TAMBAH
+
   database: drizzleAdapter(db, {
     provider: "pg",
   }),
+
   emailAndPassword: {
     enabled: true,
     autoSignIn: false,
+    requireEmailVerification: true, // ← TAMBAH
     sendResetPassword: async ({ user, url }: any) => {
       await transporter.sendMail({
         to: user.email,
@@ -26,23 +35,46 @@ export const auth = betterAuth({
       });
     },
   },
+
+  // ← TAMBAH
+  emailVerification: {
+    sendVerificationEmail: async ({ user, url, token }) => {
+      await transporter.sendMail({
+        to: user.email,
+        subject: "Verify Email - Sentra Rent",
+        html: `
+          <p>Halo ${user.name ?? "User"},</p>
+          <p>Klik link berikut untuk memverifikasi email Anda:</p>
+          <a href="${url}">${url}</a>
+          <p>Link berlaku 1 jam.</p>
+        `,
+      });
+    },
+    sendOnSignUp: true,
+    autoSignInAfterVerification: true,
+    expiresIn: 3600, // 1 hour
+  },
+  // ↑ TAMBAH
+
   plugins: [
-    openAPI(), // /api/auth/reference
+    openAPI(),
     admin({
-      impersonationSessionDuration: 60 * 60 * 24 * 7, // 7 days
+      impersonationSessionDuration: 60 * 60 * 24 * 7,
     }),
   ],
+
   session: {
     expiresIn: 60 * 60 * 24 * 3, // 3 days
-    updateAge: 60 * 60 * 24, // 1 day (every 1 day the session expiration is updated)
+    updateAge: 60 * 60 * 24, // 1 day
     cookieCache: {
       enabled: true,
-      maxAge: 5 * 60, // Cache duration in seconds
+      maxAge: 5 * 60,
     },
   },
+
   rateLimit: {
-    window: 60, // time window in seconds
-    max: 5, // max requests in the window
+    window: 60,
+    max: 5,
   },
 } satisfies BetterAuthOptions);
 
