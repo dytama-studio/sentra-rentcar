@@ -1,7 +1,7 @@
 import "dotenv/config";
 import { nanoid } from "nanoid";
 import { db } from "./connection";
-import { hashPassword } from "@/helpers/globalHelper";
+import { hashPassword } from "better-auth/crypto";
 
 import {
   user,
@@ -35,12 +35,13 @@ async function seed() {
   // =========================
   const userId = nanoid();
 
-  const hashedPassword = hashPassword("admin480");
+  const emailAdmin = "admin@gmail.com";
+  const hashedPassword = await hashPassword("admin480");
 
   await db.insert(user).values({
     id: userId,
     name: "Admin Sentra",
-    email: "admin@gmail.com",
+    email: emailAdmin,
     emailVerified: true,
     role: "admin",
     isActive: true,
@@ -57,7 +58,7 @@ async function seed() {
     userId,
     accountId: userId,
     providerId: "credential",
-    providerAccountId: userId,
+    providerAccountId: emailAdmin,
     password: hashedPassword,
   });
 

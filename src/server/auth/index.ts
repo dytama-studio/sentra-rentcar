@@ -4,6 +4,12 @@ import { openAPI, admin } from "better-auth/plugins";
 import { headers } from "next/headers";
 import { cache } from "react";
 import { db } from "../database";
+import {
+  account,
+  session,
+  user,
+  verification,
+} from "../database/schema/tables";
 import { transporter } from "./mailer";
 
 export const auth = betterAuth({
@@ -16,6 +22,12 @@ export const auth = betterAuth({
 
   database: drizzleAdapter(db, {
     provider: "pg",
+    schema: {
+      account,
+      session,
+      user,
+      verification,
+    },
   }),
 
   emailAndPassword: {
