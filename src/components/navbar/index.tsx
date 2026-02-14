@@ -15,15 +15,28 @@ import { siteConfig } from "@/config/site";
 import { useScrollSpy } from "@/hooks/useColorSpy";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { authClient } from "@/server/auth/client";
+import DropdownUser from "./dropdownuser";
 
 export default function NavbarLanding() {
   const pathname = usePathname();
-
+  const [session, setSession] = useState<any>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState<string>("home");
 
   const isHome = pathname === "/";
+
+  useEffect(() => {
+    const fetchSession = async () => {
+      const { data } = await authClient.getSession();
+      setSession(data);
+    };
+
+    fetchSession();
+  }, []);
+
+  console.log("ini session", session);
 
   // ScrollSpy ONLY for home page
   const scrollActiveId = useScrollSpy(
@@ -85,7 +98,13 @@ export default function NavbarLanding() {
           <NavItems items={siteConfig.navItems} activeId={activeId} />
 
           <div className="hidden md:flex gap-4 items-center">
-            <NavbarButton>Hubungi Whatsapp</NavbarButton>
+            {session ? (
+              <DropdownUser />
+            ) : (
+              <>
+                <NavbarButton>Hubungi Whatsapp</NavbarButton>
+              </>
+            )}
           </div>
         </NavBody>
 

@@ -1,6 +1,6 @@
 {
-  "id": "b5d422ec-0fda-4da7-bcf7-a7ce8c05e079",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "6d5cf3a2-a974-4399-b8f9-50f560f8b2a3",
+  "prevId": "b5d422ec-0fda-4da7-bcf7-a7ce8c05e079",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
@@ -522,6 +522,12 @@
         },
         "capacity": {
           "name": "capacity",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "storage": {
+          "name": "storage",
           "type": "integer",
           "primaryKey": false,
           "notNull": false

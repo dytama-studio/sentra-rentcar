@@ -71,7 +71,7 @@ export default async function RootLayout({
           showSpinner={false}
           easing="ease"
           speed={200}
-          shadow="0 0 10px #F5AD0D,0 0 5px #F5AD0D"
+          shadow="0 0 10px #4338CA,0 0 5px #4338CA"
         />
         <ToastContainer
           autoClose={3000}

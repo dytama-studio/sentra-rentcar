@@ -20,7 +20,7 @@ export const menuItem = [
       {
         icon: FaCar,
         label: "Unit Management",
-        route: "/admin/cars",
+        route: "/admin/carmanagement",
       },
     ],
   },

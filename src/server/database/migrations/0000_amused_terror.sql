@@ -83,6 +83,8 @@ CREATE TABLE "car" (
 	"thumbnail" text,
 	"status" text DEFAULT 'available',
 	"isActive" boolean DEFAULT true,
+	"transmission" text,
+	"capacity" integer,
 	"createdAt" timestamp DEFAULT now()
 );
 --> statement-breakpoint

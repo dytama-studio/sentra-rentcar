@@ -12,6 +12,8 @@ export type TDataTable<T extends Record<string, unknown>> = {
   createLabel?: string;
   isLoading?: boolean;
   handleSearch?: ChangeEventHandler<HTMLInputElement>;
+  isAdd?: boolean;
+  handleAdd?: () => void;
 };
 
 export type TTable = DetailedHTMLProps<
@@ -23,6 +25,8 @@ export type TTable = DetailedHTMLProps<
   createLink?: string;
   createLabel?: string;
   data: Array<any>;
+  isAdd?: boolean;
+  handleAdd?: () => void;
 };
 
 export type TTableHead<T> = {
