@@ -1,31 +1,29 @@
 import { authClient } from "@/server/auth/client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import ClickOutside from "../clickoutside";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { FiLayers, FiLogOut } from "react-icons/fi";
+import { UserProfile } from "@/interface/auth";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/store/reducers/UserDataSlice";
 
-const DropdownUser = () => {
-  const [user, setUser] = useState({ name: "", email: "" });
+interface Props {
+  user: UserProfile;
+}
+
+const DropdownUser = ({ user }: Props) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const router = useRouter();
-
-  useEffect(() => {
-    const fetchSession = () => {
-      authClient.getSession().then((session: any) => {
-        setUser(session?.data?.user ?? null);
-      });
-    };
-
-    fetchSession();
-  }, []);
+  const dispatch = useDispatch();
 
   const handleSignOut = async () => {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          router.push("/signin"); // redirect to login page
+          router.push("/signin");
+          dispatch(setUser(null));
         },
       },
     });
@@ -42,7 +40,7 @@ const DropdownUser = () => {
             {user.name}
           </span>
           <span className="block text-xs font-normal text-gray-500 dark:text-white">
-            {user.email}
+            {user.email_user}
           </span>
           {/* <span className="block text-xs dark:text-white">UX Designer</span> */}
         </span>

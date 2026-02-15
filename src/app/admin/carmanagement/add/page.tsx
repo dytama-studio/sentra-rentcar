@@ -1,8 +1,8 @@
-import CarManagement from "@/modules/admin/carmanagement/module";
 import React from "react";
+import ModuleAddCar from "@/modules/admin/carmanagement/add/module";
 
 const page = async () => {
-  return <CarManagement />;
+  return <ModuleAddCar />;
 };
 
 export default page;

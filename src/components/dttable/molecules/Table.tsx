@@ -13,7 +13,7 @@ export const Table: FC<TTable> = (props): ReactElement => {
   );
   return (
     <section className="shadow-md bg-white h-full overflow-y-hidden border rounded-lg w-full flex flex-col overflow-x-auto">
-      <div className="flex md:flex-row flex-col  md:items-center sticky z-10 w-full">
+      <div className="flex md:flex-row flex-row  items-center md:items-center sticky z-10 w-full">
         <SearchBox {...props} />
         <div className="max-w-sm space-y-3 me-4">
           <select

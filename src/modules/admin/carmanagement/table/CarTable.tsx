@@ -32,7 +32,8 @@ const CarTable = () => {
     setSearch(e.target.value);
   };
 
-  const handleAdd = () => {
+  const handleAdd = (e?: React.MouseEvent) => {
+    e?.preventDefault();
     router.push("/admin/carmanagement/add");
   };
 
@@ -55,7 +56,6 @@ const CarTable = () => {
     []
   );
 
-  console.log(carList);
   return (
     <DataTableController
       isLoading={isLoading}
