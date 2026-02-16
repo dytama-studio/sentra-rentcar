@@ -8,7 +8,7 @@ const MenuAdmin = () => {
 
   return (
     <div className="text-sm w-full lg:w-full p-3 bg-white border border-gray-500/30 text-gray-800/80 rounded-md font-medium">
-      <nav className="min-h-100">
+      <nav className="h-auto lg:min-h-100">
         <div className="relative w-full px-4 py-2.5 mb-4  border-gray-200 bg-indigo-50 rounded-md">
           <h5 className="text-black font-semibold text-lg">
             Hai, Sentra Rent Car

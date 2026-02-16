@@ -4,13 +4,14 @@ import {
   timestamp,
   integer,
   boolean,
+  uuid,
 } from "drizzle-orm/pg-core";
 import { organization } from "@/server/database/schema/tables";
 
 export const testimonial = pgTable("testimonial", {
-  id: text("id").primaryKey(),
+  id: uuid("id").notNull().primaryKey().defaultRandom(),
 
-  organizationId: text("organizationId")
+  organizationId: uuid("organizationId")
     .notNull()
     .references(() => organization.id),
 

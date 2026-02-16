@@ -16,7 +16,7 @@ const useFetchUser = () => {
     const fetchSession = async () => {
       const { data } = await authClient.getSession();
 
-      if (!data?.session) {
+      if (!data?.session || !data?.user) {
         dispatch(setUser(null));
         router.push("/auth/signin");
         setIsSessionLoading(false);
@@ -24,6 +24,7 @@ const useFetchUser = () => {
       }
 
       setSession(data.session);
+      dispatch(setUser(data.user));
       setIsSessionLoading(false);
     };
 
@@ -36,14 +37,13 @@ const useFetchUser = () => {
     isLoading: isUserLoading,
     error,
   } = api.user.getUserById.useQuery(
-    { id: session?.user?.id },
+    { id: session?.userId },
     {
-      enabled: !!session?.user?.id,
+      enabled: !!session?.userId,
       retry: false,
     }
   );
 
-  // 3️⃣ Handle error 401 dari backend
   useEffect(() => {
     if (error) {
       dispatch(setUser(null));
@@ -51,7 +51,6 @@ const useFetchUser = () => {
     }
   }, [error, dispatch, router]);
 
-  // 4️⃣ Set Redux kalau ada user
   useEffect(() => {
     if (user) {
       dispatch(setUser(user));

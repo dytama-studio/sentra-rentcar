@@ -12,3 +12,7 @@ export type FormAddCarValues = {
   capacity: number;
   storage: number;
 };
+
+export type FormAddCategoryValues = {
+  name: string;
+};

@@ -25,7 +25,7 @@ const DashboardAdmin = () => {
           </div>
         </div>
 
-        <div className="relative z-20 grid grid-cols-3 gap-4 w-full pt-10">
+        <div className="relative z-20 grid grid-cols-1 lg:grid-cols-3 gap-4 w-full pt-10">
           <div className="relative w-full bg-white rounded-md border border-gray-200 px-4 py-5 shadow-6">
             <div className="flex w-full justify-between">
               <div className="flex flex-col space-y-1">

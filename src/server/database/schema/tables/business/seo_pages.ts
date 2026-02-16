@@ -4,15 +4,16 @@ import {
   timestamp,
   uniqueIndex,
   boolean,
+  uuid,
 } from "drizzle-orm/pg-core";
 import { organization } from "@/server/database/schema/tables";
 
 export const seoPage = pgTable(
   "seo_page",
   {
-    id: text("id").primaryKey(),
+    id: uuid("id").notNull().primaryKey().defaultRandom(),
 
-    organizationId: text("organizationId")
+    organizationId: uuid("organizationId")
       .notNull()
       .references(() => organization.id),
 

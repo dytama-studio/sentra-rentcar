@@ -4,16 +4,17 @@ import {
   integer,
   boolean,
   timestamp,
+  uuid,
 } from "drizzle-orm/pg-core";
 import { organization, carCategory } from "@/server/database/schema/tables";
 
 export const car = pgTable("car", {
-  id: text("id").primaryKey(),
-  organizationId: text("organizationId")
+  id: uuid("id").notNull().primaryKey().defaultRandom(),
+  organizationId: uuid("organizationId")
     .notNull()
     .references(() => organization.id),
-  branchId: text("branchId"), // optional (multi cabang)
-  categoryId: text("categoryId").references(() => carCategory.id),
+  branchId: uuid("branchId"), // optional (multi cabang)
+  categoryId: uuid("categoryId").references(() => carCategory.id),
   name: text("name").notNull(),
   pricePerDay: integer("pricePerDay"),
   description: text("description"),

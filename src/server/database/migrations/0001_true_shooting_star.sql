@@ -1,1 +1,0 @@
-ALTER TABLE "car" ADD COLUMN "storage" integer;

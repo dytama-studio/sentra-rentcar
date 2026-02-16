@@ -1,8 +1,8 @@
-import { boolean, pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { boolean, pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { roleEnum, genderEnum } from "../../enum";
 
 export const user = pgTable("user", {
-  id: text("id").primaryKey(),
+  id: uuid("id").notNull().primaryKey().defaultRandom(),
   name: text("name").notNull(),
   username: text("username").unique(),
   displayUsername: text("display_username"),

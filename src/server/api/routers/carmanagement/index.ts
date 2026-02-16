@@ -1,7 +1,7 @@
 import { createTRPCRouter, protectedProcedure } from "../../trpc";
 import { TRPCError } from "@trpc/server";
-import { db, car } from "@/server/database";
-import { asc } from "drizzle-orm";
+import { db, car, carCategory, organizationUser } from "@/server/database";
+import { asc, eq } from "drizzle-orm";
 import {
   metaResponsePrefix,
   calculateTotalPages,
@@ -59,6 +59,33 @@ export const carManagementRouter = createTRPCRouter({
           code: "INTERNAL_SERVER_ERROR",
           message: `Gagal fetch product`,
         });
+      }
+    }),
+  storeCategory: protectedProcedure
+    .input((input) => input)
+    .mutation(async ({ input, ctx }: any) => {
+      const userId = ctx.session.session.userId;
+      const orgUser = await db
+        .select({
+          organizationId: organizationUser.organizationId,
+        })
+        .from(organizationUser)
+        .where(eq(organizationUser.userId, userId))
+        .then((res) => res.at(0));
+
+      if (!orgUser) {
+        throw new Error("Organization not found");
+      }
+
+      await db.insert(carCategory).values({
+        organizationId: orgUser.organizationId,
+        name: input.name,
+      });
+
+      try {
+        return await db.insert(carCategory).values({ ...input });
+      } catch (err) {
+        throw new Error(err as string);
       }
     }),
 });
