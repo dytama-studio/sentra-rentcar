@@ -1,8 +1,6 @@
 "use client";
 import React, { useRef, useState } from "react";
 import FormAddCar, { FormAddRefCarType } from "./FormAddCar";
-import { Button } from "@/components/button";
-import { FiPlusCircle } from "react-icons/fi";
 import FormAddCategory, {
   FormAddRefCategoryType,
 } from "../modal/FormAddCategory";
@@ -42,22 +40,13 @@ const ModuleAddCar = () => {
         <h3 className="text-xl lg:text-3xl font-semibold text-black">
           Buat Unit
         </h3>
-        <div>
-          <Button
-            onClick={handleOpenModal}
-            startIcon={<FiPlusCircle />}
-            size={"sm"}
-            color={"primary"}
-          >
-            Add New Category
-          </Button>
-        </div>
       </div>
       <FormAddCar
         ref={ref}
         defaultValues={{}}
         isLoading={loading}
         onSubmit={onSubmit}
+        handleOpenModal={handleOpenModal}
       />
       <FormAddCategory
         ref={refCatgory}

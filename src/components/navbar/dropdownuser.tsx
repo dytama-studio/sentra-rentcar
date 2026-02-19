@@ -22,8 +22,8 @@ const DropdownUser = ({ user }: Props) => {
     await authClient.signOut({
       fetchOptions: {
         onSuccess: () => {
-          router.push("/signin");
           dispatch(setUser(null));
+          router.push("/signin");
         },
       },
     });
@@ -37,10 +37,10 @@ const DropdownUser = ({ user }: Props) => {
       >
         <span className="text-right lg:block flex flex-col">
           <span className="block text-sm font-medium text-black dark:text-white">
-            {user.name}
+            {user?.name || ""}
           </span>
           <span className="block text-xs font-normal text-gray-500 dark:text-white">
-            {user.email_user}
+            {user?.email || ""}
           </span>
           {/* <span className="block text-xs dark:text-white">UX Designer</span> */}
         </span>

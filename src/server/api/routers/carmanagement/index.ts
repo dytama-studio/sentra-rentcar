@@ -1,4 +1,8 @@
-import { createTRPCRouter, protectedProcedure } from "../../trpc";
+import {
+  createTRPCRouter,
+  protectedProcedure,
+  publicProcedure,
+} from "../../trpc";
 import { TRPCError } from "@trpc/server";
 import { db, car, carCategory, organizationUser } from "@/server/database";
 import { asc, eq } from "drizzle-orm";
@@ -77,15 +81,31 @@ export const carManagementRouter = createTRPCRouter({
         throw new Error("Organization not found");
       }
 
-      await db.insert(carCategory).values({
+      return await db.insert(carCategory).values({
         organizationId: orgUser.organizationId,
         name: input.name,
       });
-
-      try {
-        return await db.insert(carCategory).values({ ...input });
-      } catch (err) {
-        throw new Error(err as string);
-      }
     }),
+  getCategory: publicProcedure.query(async () => {
+    try {
+      const data = await db.select().from(carCategory);
+      const ddl = data.map((item) => ({
+        code: item.id,
+        display: item.name,
+      }));
+
+      const metaPrefix = {
+        ddl,
+        meta: {
+          code: 200,
+          status: "success",
+          message: "Berhasil ambil data",
+        },
+      };
+
+      return metaPrefix;
+    } catch (err) {
+      throw new Error(err as string);
+    }
+  }),
 });

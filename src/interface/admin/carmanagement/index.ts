@@ -7,7 +7,7 @@ export type FormAddCarValues = {
   description?: string | undefined;
   thumbnail?: string | undefined;
   status: string;
-  isActive: boolean;
+  // isActive: boolean;
   transmission: string;
   capacity: number;
   storage: number;

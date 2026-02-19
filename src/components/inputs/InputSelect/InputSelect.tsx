@@ -8,6 +8,7 @@ type Props = {
   control: Control<any>;
   options: any[];
   readOnly?: boolean;
+  description?: string;
 };
 
 function InputSelect({
@@ -17,6 +18,7 @@ function InputSelect({
   control,
   options = [],
   readOnly,
+  description,
   ...rest
 }: Props) {
   const {
@@ -60,6 +62,13 @@ function InputSelect({
               </option>
             ))}
           </select>
+          {description && (
+            <>
+              <p className="text-xs text-gray-500 font-normal pt-2">
+                {description}
+              </p>
+            </>
+          )}
           {invalid ? (
             <div className="absolute inset-y-0 end-0 flex items-center pointer-events-none pe-3">
               <svg
@@ -83,6 +92,7 @@ function InputSelect({
             ""
           )}
         </div>
+
         {invalid ? (
           <p
             className="text-sm text-red-600 mt-2"

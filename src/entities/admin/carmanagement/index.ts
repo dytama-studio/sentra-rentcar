@@ -9,7 +9,7 @@ export const FormAddCarSchema = z.object({
   description: z.string().optional(),
   thumbnail: z.string().optional(),
   status: z.string().min(1, { message: "Pleese Select Status" }),
-  isActive: z.boolean(),
+  // isActive: z.boolean(),
   transmission: z.string().min(1, { message: "Pleese Select Transmission" }),
   capacity: z.number().min(1, { message: "Capacity Required" }),
   storage: z.number().min(1, { message: "Storage Required" }),

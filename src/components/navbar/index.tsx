@@ -20,9 +20,10 @@ import { UserProfile } from "@/interface/auth";
 
 interface Props {
   user: UserProfile;
+  session: any;
 }
 
-export default function NavbarLanding({ user }: Props) {
+export default function NavbarLanding({ user, session }: Props) {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -90,7 +91,7 @@ export default function NavbarLanding({ user }: Props) {
           <NavItems items={siteConfig.navItems} activeId={activeId} />
 
           <div className="hidden md:flex gap-4 items-center">
-            {user ? (
+            {session ? (
               <DropdownUser user={user} />
             ) : (
               <>

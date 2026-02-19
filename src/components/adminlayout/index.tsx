@@ -16,13 +16,13 @@ interface Props {
 
 const AdminPageLayout = ({ children }: Props) => {
   const { user } = useSelector((state: RootState) => state.User);
-  const { isLoading } = useFetchUser();
+  const { isLoading, session } = useFetchUser();
 
   if (isLoading) return <PageLoader key="loader" />;
 
   return (
     <main className="flex-1 content bg-white h-screen" id="app-container">
-      <NavbarLanding user={user} />
+      <NavbarLanding user={user} session={session} />
       <Container className="mt-24 lg:mt-24 ">
         <div className="flex flex-col lg:flex-row w-full gap-8">
           <div className="lg:w-1/5">

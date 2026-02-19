@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, {
   forwardRef,
   ForwardRefRenderFunction,
+  useEffect,
   useImperativeHandle,
 } from "react";
 import {
@@ -32,7 +33,7 @@ const FormAddCategory: ForwardRefRenderFunction<
   FormAddRefCategoryType,
   Props
 > = ({ defaultValues, onSubmit, isLoading, isOpen, handleClose }, ref) => {
-  const { control, handleSubmit, setValue, setError } = useForm({
+  const { control, handleSubmit, setValue, setError, reset } = useForm({
     defaultValues: {
       name: "",
     },
@@ -43,6 +44,14 @@ const FormAddCategory: ForwardRefRenderFunction<
     setError,
     setValue,
   }));
+
+  useEffect(() => {
+    if (isOpen) {
+      reset({
+        name: "",
+      });
+    }
+  }, [isOpen, reset]);
 
   return (
     <Modal isOpen={isOpen} className="max-w-md">

@@ -2,7 +2,7 @@ import {
   pgTable,
   text,
   integer,
-  boolean,
+  // boolean,
   timestamp,
   uuid,
 } from "drizzle-orm/pg-core";
@@ -19,8 +19,8 @@ export const car = pgTable("car", {
   pricePerDay: integer("pricePerDay"),
   description: text("description"),
   thumbnail: text("thumbnail"),
-  status: text("status").default("available"), // available | rented | maintenance
-  isActive: boolean("isActive").default(true),
+  status: text("status").default("active"), // available | rented | maintenance
+  // isActive: boolean("isActive").default(true),
   transmission: text("transmission"),
   capacity: integer("capacity"),
   storage: integer("storage"),
