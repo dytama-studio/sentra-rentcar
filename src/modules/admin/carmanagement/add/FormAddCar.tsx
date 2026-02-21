@@ -62,8 +62,8 @@ const FormAddCar: ForwardRefRenderFunction<FormAddRefCarType, Props> = (
       thumbnail: "",
       status: "",
       transmission: "",
-      capacity: 0,
-      storage: 0,
+      capacity: 1,
+      storage: 1,
       ...defaultValues,
     },
     resolver: zodResolver(FormAddCarSchema),
@@ -115,8 +115,14 @@ const FormAddCar: ForwardRefRenderFunction<FormAddRefCarType, Props> = (
                 label="Kapasitas Orang"
                 name="capacity"
                 control={control}
+                min={1}
               />
-              <InputQty label="Bagasi" name="storage" control={control} />
+              <InputQty
+                label="Bagasi"
+                name="storage"
+                control={control}
+                min={1}
+              />
               <div className="lg:col-span-2">
                 <InputSelect
                   label="Transmission"
@@ -178,7 +184,7 @@ const FormAddCar: ForwardRefRenderFunction<FormAddRefCarType, Props> = (
                   onClick={handleOpenModal}
                   startIcon={<FiPlusCircle />}
                   size={"sm"}
-                  color={"primary"}
+                  className="bg-indigo-50 border-primary text-primary hover:text-white hover:bg-primary hover:border-primary"
                 >
                   Add New Category
                 </Button>

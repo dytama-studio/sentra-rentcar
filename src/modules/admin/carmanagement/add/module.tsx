@@ -13,6 +13,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { nanoid } from "@reduxjs/toolkit";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { FiArrowDownRight } from "react-icons/fi";
 
 const ModuleAddCar = () => {
   const ref = useRef<FormAddRefCarType>(null);
@@ -89,6 +91,13 @@ const ModuleAddCar = () => {
         <h3 className="text-xl lg:text-3xl font-semibold text-black">
           Buat Unit
         </h3>
+        <Link
+          href={"/admin/carmanagement"}
+          className="inline-flex gap-2 items-center text-black text-sm hover:text-primary hover:font-semibold"
+        >
+          Kembali
+          <FiArrowDownRight />
+        </Link>
       </div>
       <FormAddCar
         ref={ref}

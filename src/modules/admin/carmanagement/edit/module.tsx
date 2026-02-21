@@ -13,6 +13,8 @@ import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import { createClient } from "@/libs/supabase/client";
 import { api } from "@/libs/trpc/react";
+import Link from "next/link";
+import { FiArrowRight } from "react-icons/fi";
 
 interface Props {
   id: string;
@@ -58,7 +60,15 @@ const ModuleEditCar = ({ id, defaultValues }: Props) => {
           .getPublicUrl(uploadData.path);
         fileUrl = publicUrlData.publicUrl;
       }
-      const payload = { ...values, thumbnail: fileUrl };
+      const payload = {
+        ...values,
+        id,
+        thumbnail:
+          fileUrl ??
+          (typeof values.thumbnail === "string"
+            ? values.thumbnail
+            : values.thumbnail?.[0] ?? null),
+      };
       updateCar(payload, {
         onSuccess: () => {
           toast.success("Unit berhasil terbuat");
@@ -96,6 +106,13 @@ const ModuleEditCar = ({ id, defaultValues }: Props) => {
         <h3 className="text-xl lg:text-3xl font-semibold text-black">
           Buat Unit
         </h3>
+        <Link
+          href={"/admin/carmanagement"}
+          className="inline-flex gap-2 items-center text-black text-sm hover:text-primary hover:font-semibold"
+        >
+          Kembali
+          <FiArrowRight />
+        </Link>
       </div>
       <FormAddCar
         ref={ref}

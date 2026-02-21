@@ -2,7 +2,13 @@ import React from "react";
 import { menuItem as MenuData } from "./menu";
 import useLocalStorage from "@/hooks/useLocalStorage";
 import SidebarItem from "./SidebarItem";
-const MenuAdmin = () => {
+import { UserProfile } from "@/interface/auth";
+
+interface Props {
+  user: UserProfile;
+}
+
+const MenuAdmin = ({ user }: Props) => {
   const menuGroups = MenuData;
   const [pageName, setPageName] = useLocalStorage("selectedMenu", "dashboard");
 
@@ -11,7 +17,7 @@ const MenuAdmin = () => {
       <nav className="h-auto lg:min-h-100">
         <div className="relative w-full px-4 py-2.5 mb-4  border-gray-200 bg-indigo-50 rounded-md">
           <h5 className="text-black font-semibold text-lg">
-            Hai, Sentra Rent Car
+            Hai, {user.organization_name || "Rental Mobil"}
           </h5>
           <p className="text-xs font-normal text-gray-500 pt-1">
             Portal Pengaturan Website Anda
