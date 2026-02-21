@@ -1,32 +1,38 @@
 "use client";
 import React, { useRef, useState } from "react";
-import FormAddCar, { FormAddRefCarType } from "./FormAddCar";
+import FormAddCar, { FormAddRefCarType } from "../add/FormAddCar";
 import FormAddCategory, {
   FormAddRefCategoryType,
 } from "../modal/FormAddCategory";
-import { api } from "@/libs/trpc/react";
 import { toast } from "react-toastify";
-import { SubmitHandler } from "react-hook-form";
+import { nanoid } from "@reduxjs/toolkit";
 import { FormAddCarValues } from "@/interface/admin/carmanagement";
-import { createClient } from "@/libs/supabase/client";
+import { SubmitHandler } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
-import { nanoid } from "@reduxjs/toolkit";
-import { useRouter } from "next/navigation";
+import { createClient } from "@/libs/supabase/client";
+import { api } from "@/libs/trpc/react";
 
-const ModuleAddCar = () => {
+interface Props {
+  id: string;
+  defaultValues: any;
+}
+
+const ModuleEditCar = ({ id, defaultValues }: Props) => {
   const ref = useRef<FormAddRefCarType>(null);
   const refCatgory = useRef<FormAddRefCategoryType>(null);
   const supabase = createClient();
   const { user } = useSelector((state: RootState) => state.User);
   const router = useRouter();
+  const utils = api.useUtils();
 
   const [openModal, setOpenModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const { mutateAsync: postCategory, isPending: isPendingCategory } =
     api.car.storeCategory.useMutation();
 
-  const { mutateAsync: postCar } = api.car.storeCar.useMutation();
+  const { mutateAsync: updateCar } = api.car.updateCar.useMutation();
 
   const onSubmit: SubmitHandler<FormAddCarValues> = async (values) => {
     setLoading(true);
@@ -53,9 +59,10 @@ const ModuleAddCar = () => {
         fileUrl = publicUrlData.publicUrl;
       }
       const payload = { ...values, thumbnail: fileUrl };
-      postCar(payload, {
+      updateCar(payload, {
         onSuccess: () => {
           toast.success("Unit berhasil terbuat");
+          utils.car.getList.invalidate();
           router.push("/admin/carmanagement");
         },
         onError: (err: any) => {
@@ -92,7 +99,7 @@ const ModuleAddCar = () => {
       </div>
       <FormAddCar
         ref={ref}
-        defaultValues={{}}
+        defaultValues={defaultValues}
         isLoading={loading}
         onSubmit={onSubmit}
         handleOpenModal={handleOpenModal}
@@ -109,4 +116,4 @@ const ModuleAddCar = () => {
   );
 };
 
-export default ModuleAddCar;
+export default ModuleEditCar;

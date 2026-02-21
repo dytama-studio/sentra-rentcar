@@ -1,5 +1,4 @@
 import InputCurrency from "@/components/inputs/InputCurrency";
-import InputNum from "@/components/inputs/InputNum/InputNum";
 import InputSelect from "@/components/inputs/InputSelect";
 import InputText from "@/components/inputs/InputText";
 import InputTextArea from "@/components/inputs/InputTextArea";
@@ -21,6 +20,7 @@ import {
 import { api } from "@/libs/trpc/react";
 import { Button } from "@/components/button";
 import { FiPlusCircle } from "react-icons/fi";
+import InputQty from "@/components/inputs/InputQty";
 
 interface Props {
   defaultValues: any;
@@ -46,19 +46,24 @@ const FormAddCar: ForwardRefRenderFunction<FormAddRefCarType, Props> = (
     { code: "draft", display: "draft" },
   ];
 
+  const transmissionDdl = [
+    { code: "manual", display: "Manual" },
+    { code: "automatic", display: "Automatic" },
+  ];
+
   const { control, handleSubmit, setValue, setError } = useForm({
     defaultValues: {
-      organizationId: "",
-      branchId: "",
+      // organizationId: "",
+      // branchId: "",
       categoryId: "",
       name: "",
-      pricePerDay: "",
+      pricePerDay: 0,
       description: "",
       thumbnail: "",
       status: "",
       transmission: "",
-      capacity: "",
-      storage: "",
+      capacity: 0,
+      storage: 0,
       ...defaultValues,
     },
     resolver: zodResolver(FormAddCarSchema),
@@ -106,18 +111,21 @@ const FormAddCar: ForwardRefRenderFunction<FormAddRefCarType, Props> = (
               </h4>
             </div>
             <div className="relative grid grid-cols-1 lg:grid-cols-2 w-full gap-4 px-4 py-2.5">
-              <InputNum
+              <InputQty
                 label="Kapasitas Orang"
                 name="capacity"
                 control={control}
-                placeholder="0"
               />
-              <InputNum
-                label="Bagasi"
-                name="storage"
-                control={control}
-                placeholder="0"
-              />
+              <InputQty label="Bagasi" name="storage" control={control} />
+              <div className="lg:col-span-2">
+                <InputSelect
+                  label="Transmission"
+                  name={"transmission"}
+                  control={control}
+                  placeholder={"Pilih transmission"}
+                  options={transmissionDdl || []}
+                />
+              </div>
             </div>
             <div className="px-4 py-2.5 border-t border-gray-200 flex flex-col lg:flex-row lg:justify-between lg:items-center">
               <div className="space-y-1">
