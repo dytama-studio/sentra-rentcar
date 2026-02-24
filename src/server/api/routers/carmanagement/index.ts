@@ -11,7 +11,7 @@ import {
   organizationUser,
   branch,
 } from "@/server/database";
-import { asc, eq } from "drizzle-orm";
+import { asc, eq, or, ilike } from "drizzle-orm";
 import {
   metaResponsePrefix,
   calculateTotalPages,
@@ -27,6 +27,7 @@ export const carManagementRouter = createTRPCRouter({
       try {
         const page = input?.page || 1;
         const perPage = input?.perPage || 5;
+        const search = input?.search?.trim() ?? "";
         const offset = (page - 1) * perPage;
 
         if (!ctx?.session?.user?.id) {
@@ -35,6 +36,15 @@ export const carManagementRouter = createTRPCRouter({
             message: `User tidak teridentifikasi`,
           });
         }
+
+        const whereCondition = search
+          ? or(
+              ilike(car.name, `%${search}%`),
+              ilike(carCategory.name, `%${search}%`),
+              ilike(car.transmission, `%${search}%`),
+              ilike(car.status, `%${search}%`)
+            )
+          : undefined;
 
         const data = await db
           .select({
@@ -52,14 +62,18 @@ export const carManagementRouter = createTRPCRouter({
           })
           .from(car)
           .leftJoin(carCategory, eq(carCategory.id, car.categoryId))
+          .where(whereCondition)
           .limit(perPage)
-          .offset(input?.search ? 0 : offset)
-          .orderBy(car.createdAt, asc(car.createdAt));
+          .offset(offset)
+          .orderBy(asc(car.createdAt));
 
-        const count = await db
+        const countResult = await db
           .select({ id: car.id })
           .from(car)
-          .then((res) => res.length);
+          .leftJoin(carCategory, eq(carCategory.id, car.categoryId))
+          .where(whereCondition);
+
+        const count = countResult.length;
 
         const totalPage = calculateTotalPages(count, perPage);
         const nextPage = page < totalPage ? page + 1 : null;

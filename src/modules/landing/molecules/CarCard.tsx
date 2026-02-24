@@ -1,11 +1,12 @@
-import { CarCardType } from "@/interface/landing";
+import { CarItemValue } from "@/interface/landing";
 import React from "react";
 import Image from "next/image";
 import { FaBriefcase, FaCar, FaUsers } from "react-icons/fa";
+import { formatCurrency } from "@/helpers/globalHelper";
 
 interface Props {
-  data: CarCardType;
-  handleOpenModal: () => void;
+  data: CarItemValue;
+  handleOpenModal: (data: CarItemValue) => void;
 }
 
 const CarCard = ({ data, handleOpenModal }: Props) => {
@@ -13,11 +14,11 @@ const CarCard = ({ data, handleOpenModal }: Props) => {
     <div className="w-full rounded-2xl bg-white overflow-hidden">
       <div className="relative p-3 bg-zinc-50 rounded-2xl">
         <span className="absolute top-3 left-3 bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full">
-          {data.category}
+          {data.categoryName}
         </span>
 
         <Image
-          src={data.url}
+          src={data.thumbnail}
           alt={data.name}
           width={800}
           height={800}
@@ -38,7 +39,7 @@ const CarCard = ({ data, handleOpenModal }: Props) => {
             <FaUsers /> <span>{data.capacity}</span> Orang
           </div>
           <div className="flex items-center gap-1">
-            <FaBriefcase /> <span>{data.capacity}</span> Koper
+            <FaBriefcase /> <span>{data.storage}</span> Koper
           </div>
         </div>
 
@@ -46,12 +47,14 @@ const CarCard = ({ data, handleOpenModal }: Props) => {
           <p className="text-xs text-gray-500">Harga Sewa</p>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 mt-1">
             <p className="text-base sm:text-xl font-bold text-gray-900">
-              {data.price}
+              {formatCurrency(data.pricePerDay)}
               <span className="text-xs sm:text-sm font-normal">/Hari</span>
             </p>
 
             <button
-              onClick={handleOpenModal}
+              onClick={() => {
+                handleOpenModal(data);
+              }}
               className="bg-indigo-600 hover:bg-indigo-700 text-white text-xs sm:text-sm font-medium px-3 py-2 rounded-full transition"
             >
               Sewa Sekarang

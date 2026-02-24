@@ -2,8 +2,11 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ["avxwxkbyahehqfbikbfl.supabase.co"],
     remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "avxwxkbyahehqfbikbfl.supabase.co",
+      },
       {
         protocol: "https",
         hostname: "images.unsplash.com",

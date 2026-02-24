@@ -14,7 +14,7 @@ import { RootState } from "@/store/store";
 import { nanoid } from "@reduxjs/toolkit";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { FiArrowDownRight } from "react-icons/fi";
+import { FiArrowRight } from "react-icons/fi";
 
 const ModuleAddCar = () => {
   const ref = useRef<FormAddRefCarType>(null);
@@ -96,7 +96,7 @@ const ModuleAddCar = () => {
           className="inline-flex gap-2 items-center text-black text-sm hover:text-primary hover:font-semibold"
         >
           Kembali
-          <FiArrowDownRight />
+          <FiArrowRight />
         </Link>
       </div>
       <FormAddCar
