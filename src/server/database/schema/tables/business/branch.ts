@@ -1,9 +1,9 @@
-import { pgTable, text, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import { organization } from "@/server/database/schema/tables";
 
 export const branch = pgTable("branch", {
-  id: text("id").primaryKey(),
-  organizationId: text("organizationId")
+  id: uuid("id").notNull().primaryKey().defaultRandom(),
+  organizationId: uuid("organizationId")
     .notNull()
     .references(() => organization.id),
 

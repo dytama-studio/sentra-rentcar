@@ -1,14 +1,13 @@
-import { pgTable, text, timestamp, boolean } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, boolean, uuid } from "drizzle-orm/pg-core";
 import { user, organization } from "@/server/database/schema/tables";
 
 export const organizationUser = pgTable("organization_user", {
-  id: text("id").primaryKey(),
-
-  userId: text("userId")
+  id: uuid("id").notNull().primaryKey().defaultRandom(),
+  userId: uuid("userId")
     .notNull()
     .references(() => user.id),
 
-  organizationId: text("organizationId")
+  organizationId: uuid("organizationId")
     .notNull()
     .references(() => organization.id),
 

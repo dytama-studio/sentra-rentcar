@@ -1,14 +1,14 @@
-import { pgTable, text, timestamp, date } from "drizzle-orm/pg-core";
+import { pgTable, text, timestamp, date, uuid } from "drizzle-orm/pg-core";
 import { organization, car } from "@/server/database/schema/tables";
 
 export const booking = pgTable("booking", {
-  id: text("id").primaryKey(),
+  id: uuid("id").notNull().primaryKey().defaultRandom(),
 
-  organizationId: text("organizationId")
+  organizationId: uuid("organizationId")
     .notNull()
     .references(() => organization.id),
 
-  carId: text("carId").references(() => car.id),
+  carId: uuid("carId").references(() => car.id),
 
   customerName: text("customerName"),
   customerPhone: text("customerPhone"),

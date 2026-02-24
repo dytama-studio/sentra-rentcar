@@ -15,10 +15,16 @@ import { siteConfig } from "@/config/site";
 import { useScrollSpy } from "@/hooks/useColorSpy";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import DropdownUser from "./dropdownuser";
+import { UserProfile } from "@/interface/auth";
 
-export default function NavbarLanding() {
+interface Props {
+  user: UserProfile;
+  session: any;
+}
+
+export default function NavbarLanding({ user, session }: Props) {
   const pathname = usePathname();
-
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeId, setActiveId] = useState<string>("home");
@@ -85,7 +91,13 @@ export default function NavbarLanding() {
           <NavItems items={siteConfig.navItems} activeId={activeId} />
 
           <div className="hidden md:flex gap-4 items-center">
-            <NavbarButton>Hubungi Whatsapp</NavbarButton>
+            {session ? (
+              <DropdownUser user={user} />
+            ) : (
+              <>
+                <NavbarButton>Hubungi Whatsapp</NavbarButton>
+              </>
+            )}
           </div>
         </NavBody>
 

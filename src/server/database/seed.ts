@@ -1,7 +1,7 @@
 import "dotenv/config";
-import bcrypt from "bcryptjs";
-import { nanoid } from "nanoid";
 import { db } from "./connection";
+import { hashPassword } from "better-auth/crypto";
+import { randomUUID } from "crypto";
 
 import {
   user,
@@ -13,86 +13,90 @@ import {
 
 async function seed() {
   console.log("🌱 Seeding database...");
-  console.log("DATABASE_URL:", process.env.DATABASE_URL);
-  // =========================
-  // 1. ORGANIZATION
-  // =========================
-  const organizationId = nanoid();
 
-  await db.insert(organization).values({
-    id: organizationId,
-    name: "Sentra Rent Car",
-    slug: "sentra-rent-car",
-    phone: "08123456789",
-    email: "admin@gmail.com",
-    address: "Indonesia",
-  });
+  try {
+    // =========================
+    // 1. ORGANIZATION
+    // =========================
+    const [createdOrganization] = await db
+      .insert(organization)
+      .values({
+        name: "Sentra Rent Car",
+        slug: "sentra-rent-car",
+        phone: "08123456789",
+        email: "admin@gmail.com",
+        address: "Indonesia",
+      })
+      .returning();
 
-  console.log("✅ Organization created");
+    console.log("✅ Organization created");
 
-  // =========================
-  // 2. USER (ADMIN)
-  // =========================
-  const userId = nanoid();
-  const hashedPassword = await bcrypt.hash("admin480", 10);
+    // =========================
+    // 2. USER (ADMIN)
+    // =========================
+    const emailAdmin = "admin@gmail.com";
+    const hashedPassword = await hashPassword("admin480");
 
-  await db.insert(user).values({
-    id: userId,
-    name: "Admin Sentra",
-    email: "admin@gmail.com",
-    emailVerified: true,
-    role: "admin",
-    isActive: true,
-  });
+    const [createdUser] = await db
+      .insert(user)
+      .values({
+        name: "Admin Sentra",
+        email: emailAdmin,
+        emailVerified: true,
+        role: "admin",
+        isActive: true,
+      })
+      .returning();
 
-  console.log("✅ User admin created");
+    console.log("✅ User admin created");
 
-  // =========================
-  // 3. ACCOUNT (EMAIL + PASSWORD)
-  // =========================
-  await db.insert(account).values({
-    id: nanoid(),
-    userId,
-    providerId: "credentials",
-    accountId: "admin@gmail.com",
-    password: hashedPassword,
-    createdAt: new Date(),
-  });
+    // =========================
+    // 3. ACCOUNT (Better Auth Credential)
+    // =========================
+    await db.insert(account).values({
+      id: randomUUID(), // karena id account = text dan tidak auto
+      userId: createdUser.id,
+      accountId: createdUser.id,
+      providerId: "credential",
+      providerAccountId: emailAdmin,
+      password: hashedPassword,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
 
-  console.log("✅ Account credentials created");
+    console.log("✅ Account credentials created");
 
-  // =========================
-  // 4. ORGANIZATION USER (OWNER)
-  // =========================
-  await db.insert(organizationUser).values({
-    id: nanoid(),
-    userId,
-    organizationId,
-    role: "owner",
-    isActive: true,
-  });
+    // =========================
+    // 4. ORGANIZATION USER (OWNER ROLE)
+    // =========================
+    await db.insert(organizationUser).values({
+      userId: createdUser.id,
+      organizationId: createdOrganization.id,
+      role: "owner",
+      isActive: true,
+    });
 
-  console.log("✅ Organization user created");
+    console.log("✅ Organization user created");
 
-  // =========================
-  // 5. DEFAULT BRANCH
-  // =========================
-  await db.insert(branch).values({
-    id: nanoid(),
-    organizationId,
-    name: "Sentra Rent Car - Pusat",
-    address: "Kantor Pusat",
-    phone: "08123456789",
-  });
+    // =========================
+    // 5. DEFAULT BRANCH
+    // =========================
+    await db.insert(branch).values({
+      organizationId: createdOrganization.id,
+      name: "Sentra Rent Car - Pusat",
+      address: "Kantor Pusat",
+      phone: "08123456789",
+    });
 
-  console.log("✅ Branch created");
+    console.log("✅ Branch created");
 
-  console.log("🎉 Seeding finished successfully");
+    console.log("🎉 Seeding finished successfully");
+  } catch (error) {
+    console.error("❌ Seeding failed:", error);
+    process.exit(1);
+  }
+
+  process.exit(0);
 }
 
-seed()
-  .then(() => process.exit(0))
-  .catch((err) => {
-    console.error("❌ Seeding failed:", err);
-    process.exit(1);
-  });
+seed();

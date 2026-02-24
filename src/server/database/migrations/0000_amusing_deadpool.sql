@@ -2,9 +2,10 @@ CREATE TYPE "public"."gender" AS ENUM('male', 'female');--> statement-breakpoint
 CREATE TYPE "public"."role" AS ENUM('owner', 'admin', 'user');--> statement-breakpoint
 CREATE TABLE "account" (
 	"id" text PRIMARY KEY NOT NULL,
+	"userId" uuid NOT NULL,
 	"accountId" text NOT NULL,
 	"providerId" text NOT NULL,
-	"userId" text NOT NULL,
+	"providerAccountId" text NOT NULL,
 	"accessToken" text,
 	"refreshToken" text,
 	"idToken" text,
@@ -22,14 +23,14 @@ CREATE TABLE "session" (
 	"token" text NOT NULL,
 	"ipAddress" text,
 	"userAgent" text,
-	"userId" text NOT NULL,
+	"userId" uuid NOT NULL,
 	"createdAt" timestamp DEFAULT now(),
 	"updatedAt" timestamp DEFAULT now(),
 	CONSTRAINT "session_token_unique" UNIQUE("token")
 );
 --> statement-breakpoint
 CREATE TABLE "user" (
-	"id" text PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"name" text NOT NULL,
 	"username" text,
 	"display_username" text,
@@ -55,7 +56,7 @@ CREATE TABLE "verification" (
 );
 --> statement-breakpoint
 CREATE TABLE "organization" (
-	"id" text PRIMARY KEY NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
 	"name" text NOT NULL,
 	"slug" text,
 	"phone" text,
@@ -66,29 +67,32 @@ CREATE TABLE "organization" (
 );
 --> statement-breakpoint
 CREATE TABLE "car_category" (
-	"id" text PRIMARY KEY NOT NULL,
-	"organizationId" text NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"organizationId" uuid NOT NULL,
 	"name" text NOT NULL
 );
 --> statement-breakpoint
 CREATE TABLE "car" (
-	"id" text PRIMARY KEY NOT NULL,
-	"organizationId" text NOT NULL,
-	"branchId" text,
-	"categoryId" text,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"organizationId" uuid NOT NULL,
+	"branchId" uuid,
+	"categoryId" uuid,
 	"name" text NOT NULL,
 	"pricePerDay" integer,
 	"description" text,
 	"thumbnail" text,
 	"status" text DEFAULT 'available',
 	"isActive" boolean DEFAULT true,
+	"transmission" text,
+	"capacity" integer,
+	"storage" integer,
 	"createdAt" timestamp DEFAULT now()
 );
 --> statement-breakpoint
 CREATE TABLE "booking" (
-	"id" text PRIMARY KEY NOT NULL,
-	"organizationId" text NOT NULL,
-	"carId" text,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"organizationId" uuid NOT NULL,
+	"carId" uuid,
 	"customerName" text,
 	"customerPhone" text,
 	"startDate" date,
@@ -99,8 +103,8 @@ CREATE TABLE "booking" (
 );
 --> statement-breakpoint
 CREATE TABLE "branch" (
-	"id" text PRIMARY KEY NOT NULL,
-	"organizationId" text NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"organizationId" uuid NOT NULL,
 	"name" text NOT NULL,
 	"address" text,
 	"phone" text,
@@ -108,17 +112,17 @@ CREATE TABLE "branch" (
 );
 --> statement-breakpoint
 CREATE TABLE "organization_user" (
-	"id" text PRIMARY KEY NOT NULL,
-	"userId" text NOT NULL,
-	"organizationId" text NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"userId" uuid NOT NULL,
+	"organizationId" uuid NOT NULL,
 	"role" text DEFAULT 'owner',
 	"isActive" boolean DEFAULT true,
 	"createdAt" timestamp DEFAULT now()
 );
 --> statement-breakpoint
 CREATE TABLE "payment" (
-	"id" text PRIMARY KEY NOT NULL,
-	"bookingId" text,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"bookingId" uuid,
 	"amount" integer,
 	"method" text,
 	"status" text,
@@ -127,8 +131,8 @@ CREATE TABLE "payment" (
 );
 --> statement-breakpoint
 CREATE TABLE "seo_page" (
-	"id" text PRIMARY KEY NOT NULL,
-	"organizationId" text NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"organizationId" uuid NOT NULL,
 	"pageKey" text NOT NULL,
 	"title" text,
 	"description" text,
@@ -139,8 +143,8 @@ CREATE TABLE "seo_page" (
 );
 --> statement-breakpoint
 CREATE TABLE "testimonial" (
-	"id" text PRIMARY KEY NOT NULL,
-	"organizationId" text NOT NULL,
+	"id" uuid PRIMARY KEY DEFAULT gen_random_uuid() NOT NULL,
+	"organizationId" uuid NOT NULL,
 	"name" text,
 	"rating" integer,
 	"message" text,
@@ -149,7 +153,7 @@ CREATE TABLE "testimonial" (
 );
 --> statement-breakpoint
 ALTER TABLE "account" ADD CONSTRAINT "account_userId_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."user"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
-ALTER TABLE "session" ADD CONSTRAINT "session_userId_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."user"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
+ALTER TABLE "session" ADD CONSTRAINT "session_userId_user_id_fk" FOREIGN KEY ("userId") REFERENCES "public"."user"("id") ON DELETE cascade ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "car_category" ADD CONSTRAINT "car_category_organizationId_organization_id_fk" FOREIGN KEY ("organizationId") REFERENCES "public"."organization"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "car" ADD CONSTRAINT "car_organizationId_organization_id_fk" FOREIGN KEY ("organizationId") REFERENCES "public"."organization"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint
 ALTER TABLE "car" ADD CONSTRAINT "car_categoryId_car_category_id_fk" FOREIGN KEY ("categoryId") REFERENCES "public"."car_category"("id") ON DELETE no action ON UPDATE no action;--> statement-breakpoint

@@ -7,10 +7,6 @@ export const Pagination: FC<TPagination> = (props): ReactElement => {
   const { meta } = props;
 
   const [page, setPage] = useQueryState("page", parseAsInteger);
-  const [perPage, setPerPage]: any = useQueryState(
-    "perPage",
-    parseAsInteger.withDefault(5)
-  );
 
   const totalPage = Number(meta?.totalPage) || 0;
   const currentPage = Number(meta?.page) || 1;
@@ -26,22 +22,6 @@ export const Pagination: FC<TPagination> = (props): ReactElement => {
 
   return (
     <div className="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center">
-      <div className="max-w-sm space-y-3">
-        <select
-          value={perPage || 5}
-          onChange={(e) => {
-            setPerPage(Number(e.target.value));
-          }}
-          className="py-2 px-3 pe-9 block border border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:text-neutral-400"
-        >
-          {[5, 10, 20, 30].map((pageSize) => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
-      </div>
-
       <div>
         <div className="inline-flex gap-x-2">
           <button
