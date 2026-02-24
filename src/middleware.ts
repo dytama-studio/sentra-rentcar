@@ -1,31 +1,18 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { betterFetch } from "@better-fetch/fetch";
-import type { Session } from "@/server/auth";
 
-// Route khusus admin yang ingin diproteksi
-const protectedRoutes = ["/admin"];
+export default function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
 
-export default async function authMiddleware(request: NextRequest) {
-  const pathName = request.nextUrl.pathname;
-  const isProtected = protectedRoutes.some(
-    (route) => pathName === route || pathName.startsWith(route + "/")
-  );
-
-  if (!isProtected) {
+  if (!pathname.startsWith("/admin")) {
     return NextResponse.next();
   }
 
-  const { data: session } = await betterFetch<Session>(
-    "/api/auth/get-session",
-    {
-      baseURL: process.env.BETTER_AUTH_URL || request.nextUrl.origin,
-      headers: {
-        cookie: request.headers.get("cookie") ?? "",
-      },
-    }
-  );
+  // Cek apakah cookie auth ada
+  const hasSessionCookie =
+    request.cookies.get("better-auth.session_token") ||
+    request.cookies.get("__Secure-better-auth.session_token");
 
-  if (!session) {
+  if (!hasSessionCookie) {
     return NextResponse.redirect(new URL("/signin", request.url));
   }
 
@@ -33,7 +20,5 @@ export default async function authMiddleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    "/admin/:path*", // hanya match /admin dan turunannya
-  ],
+  matcher: ["/admin/:path*"],
 };

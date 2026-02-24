@@ -23,7 +23,6 @@ export default function PublicLayout({ children }: Props) {
     fetchSession();
   }, []);
 
-  console.log(session);
   return (
     <PageTransition>
       <main className="flex-1 content bg-white" id="app-container">

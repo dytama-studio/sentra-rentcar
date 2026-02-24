@@ -43,7 +43,7 @@ const FormAddCar: ForwardRefRenderFunction<FormAddRefCarType, Props> = (
   const statusOptionDdl = [
     { code: "active", display: "Active" },
     { code: "inactive", display: "InActive" },
-    { code: "draft", display: "draft" },
+    { code: "draft", display: "Draft" },
   ];
 
   const transmissionDdl = [
@@ -53,8 +53,6 @@ const FormAddCar: ForwardRefRenderFunction<FormAddRefCarType, Props> = (
 
   const { control, handleSubmit, setValue, setError } = useForm({
     defaultValues: {
-      // organizationId: "",
-      // branchId: "",
       categoryId: "",
       name: "",
       pricePerDay: 0,
@@ -210,8 +208,14 @@ const FormAddCar: ForwardRefRenderFunction<FormAddRefCarType, Props> = (
           </div>
         </div>
       </div>
-      <div className="flex w-full justify-start items-center">
+      <div className="flex w-full justify-end items-center">
         <div className="grid grid-cols-2 gap-4 pt-4">
+          <button
+            type="button"
+            className="px-5 py-2 bg-white border border-danger rounded-lg shadow-sm text-danger text-sm"
+          >
+            Cancel
+          </button>
           <button
             type="submit"
             className="ms-2 px-10 py-2 bg-indigo-700 hover:bg-indigo-800 font-semibold rounded-lg shadow-m text-white text-sm"
@@ -241,12 +245,6 @@ const FormAddCar: ForwardRefRenderFunction<FormAddRefCarType, Props> = (
             ) : (
               "Submit"
             )}
-          </button>
-          <button
-            type="button"
-            className="px-5 py-2 bg-white border border-danger rounded-lg shadow-sm text-danger text-sm"
-          >
-            Cancel
           </button>
         </div>
       </div>

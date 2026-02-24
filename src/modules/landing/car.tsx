@@ -2,11 +2,11 @@
 import Container from "@/components/container";
 import React from "react";
 import { useLanding } from "./action/uselanding.action";
-import { carList } from "./mockdata";
 import CarCard from "./molecules/CarCard";
-import Link from "next/link";
 import ModalRentCar from "./modal/ModalRentCar";
 import { FiArrowUpRight } from "react-icons/fi";
+import Spinner1 from "@/components/spinners";
+import { CarItemValue } from "@/interface/landing";
 
 const CarSection = () => {
   const {
@@ -15,17 +15,27 @@ const CarSection = () => {
     tabActive,
     openModalBook,
     handleOpenModalBook,
+    handleCloseModalBook,
+    loadingCar,
+    visibleCars,
+    shouldShowToggle,
+    showAll,
+    handleToggleShow,
+    detailData,
   } = useLanding();
 
   const onSubmit = (values: any) => {};
 
   return (
     <section className="relative justify-center mt-5 lg:mt-10" id="CarList">
-      <ModalRentCar
-        isOpen={openModalBook}
-        handleClose={handleOpenModalBook}
-        onSubmit={onSubmit}
-      />
+      {detailData && (
+        <ModalRentCar
+          isOpen={openModalBook}
+          handleClose={handleCloseModalBook}
+          onSubmit={onSubmit}
+          detailData={detailData}
+        />
+      )}
       <Container>
         <div className="flex flex-col lg:flex-row w-full justify-start lg:justify-between">
           <div className="flex flex-col">
@@ -84,27 +94,40 @@ const CarSection = () => {
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 mt-5 lg:mt-10">
-          {carList.map((item, key) => {
-            return (
-              <CarCard
-                key={key}
-                data={item}
-                handleOpenModal={handleOpenModalBook}
-              />
-            );
-          })}
-        </div>
+        {loadingCar ? (
+          <div className="relative w-full">
+            <div className="flex w-full justify-center p-5">
+              <Spinner1 />
+            </div>
+          </div>
+        ) : visibleCars && visibleCars?.length > 0 ? (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8 mt-5 lg:mt-10">
+            {visibleCars.map((item: CarItemValue, key: React.Key) => {
+              return (
+                <CarCard
+                  key={key}
+                  data={item}
+                  handleOpenModal={handleOpenModalBook}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div className="relative w-full justify-center items-center h-40"></div>
+        )}
+
         <div className="pt-5 flex w-full justify-center">
-          <Link
-            href={"/"}
-            className="flex items-center gap-2 text-primary hover:text-indigo-800 text-md font-semibold"
-          >
-            Lihat Lainnya
-            <span className="bg-indigo-100 text-primary text-sm font-medium px-2 py-2 rounded-full">
-              <FiArrowUpRight />
-            </span>
-          </Link>
+          {shouldShowToggle && (
+            <button
+              onClick={handleToggleShow}
+              className="flex items-center gap-2 text-primary hover:text-indigo-800 text-md font-semibold"
+            >
+              {showAll ? "Tampilkan Lebih Sedikit" : "Lihat Semua"}
+              <span className="bg-indigo-100 text-primary text-sm font-medium px-2 py-2 rounded-full">
+                <FiArrowUpRight />
+              </span>
+            </button>
+          )}
         </div>
       </Container>
     </section>

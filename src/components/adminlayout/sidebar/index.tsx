@@ -5,7 +5,7 @@ import SidebarItem from "./SidebarItem";
 import { UserProfile } from "@/interface/auth";
 
 interface Props {
-  user: UserProfile;
+  user: UserProfile | null;
 }
 
 const MenuAdmin = ({ user }: Props) => {
@@ -17,7 +17,7 @@ const MenuAdmin = ({ user }: Props) => {
       <nav className="h-auto lg:min-h-100">
         <div className="relative w-full px-4 py-2.5 mb-4  border-gray-200 bg-indigo-50 rounded-md">
           <h5 className="text-black font-semibold text-lg">
-            Hai, {user.organization_name || "Rental Mobil"}
+            Hai, {user?.organization_name || "Rental Mobil"}
           </h5>
           <p className="text-xs font-normal text-gray-500 pt-1">
             Portal Pengaturan Website Anda

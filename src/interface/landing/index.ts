@@ -16,3 +16,17 @@ export type FormPenyewaValue = {
   contact: string;
   address: string;
 };
+
+export type CarItemValue = {
+  id: string;
+  name: string;
+  categoryName: string;
+  pricePerDay: number;
+  description: string;
+  thumbnail: string;
+  status: string;
+  capacity: number;
+  storage: number;
+  transmission: number;
+  createdAt: string;
+};
