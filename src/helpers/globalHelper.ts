@@ -1,13 +1,22 @@
 import { TMetaItem, TMetaResponse } from "@/entities/meta";
 import crypto from "crypto";
 
-export const handleToContact = () => {
+export const handleToContact = ({
+  phone,
+  message,
+}: {
+  phone: string;
+  message: string;
+}) => {
+  if (!phone) return;
+
+  const encodedMessage = encodeURIComponent(message ?? "");
+
   window.open(
-    "https://wa.me/+6287888362186?text=Halo%20saya%20tertarik%20dengan%20layanan%20Anda",
+    `https://wa.me/${phone.replace(/\D/g, "")}?text=${encodedMessage}`,
     "_blank"
   );
 };
-
 export const formatCurrency = (value: number | unknown): string =>
   new Intl.NumberFormat("id-ID", {
     style: "currency",

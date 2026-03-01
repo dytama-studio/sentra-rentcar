@@ -15,6 +15,13 @@
       "when": 1771513030433,
       "tag": "0001_sloppy_sheva_callister",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1772024600043,
+      "tag": "0002_misty_epoch",
+      "breakpoints": true
     }
   ]
 }

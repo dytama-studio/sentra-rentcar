@@ -4,8 +4,21 @@ import Container from "@/components/container";
 import BannerKontak from "./molecules/bannerkontak";
 import { FiArrowRight } from "react-icons/fi";
 import { handleToContact } from "@/helpers/globalHelper";
+import { useSiteConfig } from "@/libs/site/site-config.provider";
 
 export default function ContactModule() {
+  const config = useSiteConfig();
+  console.log(config);
+
+  const handleClick = () => {
+    handleToContact({
+      phone: config.phone,
+      message:
+        config.whatsappTemplate ??
+        `Halo saya tertarik dengan layanan ${config.name}`,
+    });
+  };
+
   return (
     <section className="mt-18 lg:mt-25">
       <Container>
@@ -24,7 +37,7 @@ export default function ContactModule() {
               </p>
               <div className="pt-10 lg:pt-18">
                 <button
-                  onClick={handleToContact}
+                  onClick={handleClick}
                   className="mt-6 inline-flex items-center gap-3 bg-gradient-to-t from-gray-900 to bg-gray-800 text-white hover:from-indigo-500 hover:to-indigo-700 transition-all rounded-full px-5 py-2.5 text-sm font-medium"
                 >
                   Hubungi Kami
@@ -40,20 +53,20 @@ export default function ContactModule() {
               <div className="space-y-1">
                 <p className="text-gray-500 font-normal text-xs">Email</p>
                 <h3 className="text-black font-semibold  text-sm lg:text-3xl">
-                  Hello@sentra.co.id
+                  {config.email || ""}
                 </h3>
               </div>
               <div className="space-y-1">
                 <p className="text-gray-500 font-normal text-xs">Phone</p>
                 <h3 className="text-black font-semibold text-sm lg:text-3xl">
-                  +61 783 678 37
+                  {config.phone || ""}
                 </h3>
                 <p className="text-gray-500 font-normal text-xs lg:text-sm">
                   Available Monday to Friday, 9 AM - 6 PM GMT
                 </p>
               </div>
               <div className="col-span-2">
-                <GoogleMapEmbed />
+                <GoogleMapEmbed values={config.googleMapUrl || ""} />
               </div>
             </div>
           </div>
@@ -63,18 +76,13 @@ export default function ContactModule() {
   );
 }
 
-const GoogleMapEmbed = () => {
+const GoogleMapEmbed = ({ values }: { values: string }) => {
+  if (!values) return null;
+
   return (
-    <div className="w-full h-[300px] rounded-xl overflow-hidden border">
-      <iframe
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.666666666667!2d106.827153!3d-6.175392!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f4f1c2a3b8df%3A0x6a6f3d4b5c2e7a6!2sMonas!5e0!3m2!1sen!2sid!4v1710000000000"
-        width="100%"
-        height="100%"
-        loading="lazy"
-        referrerPolicy="no-referrer-when-downgrade"
-        className="border-0"
-        allowFullScreen
-      />
-    </div>
+    <div
+      className="w-full h-[300px] rounded-xl overflow-hidden border [&>iframe]:w-full [&>iframe]:h-full"
+      dangerouslySetInnerHTML={{ __html: values }}
+    />
   );
 };

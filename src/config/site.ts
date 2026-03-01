@@ -18,24 +18,25 @@ export const siteConfig = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://nextui.org",
+    url: "https://sentra-rentcar.vercel.app",
     siteName: "NextUI",
     description: "Beautiful, fast and modern React UI Library",
     images: [
       {
-        url: "https://nextui.org/twitter-cards/nextui.jpeg",
+        url: "https://avxwxkbyahehqfbikbfl.supabase.co/storage/v1/object/public/sentracar/showcase/Instagram%20Post.webp",
         width: 1200,
         height: 630,
-        alt: "NextUI",
+        alt: "Sentra Rent Car",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "NextUI - Beautiful, fast and modern React UI Library",
+    title: "RentalMobil",
     description:
       "Make beautiful websites regardless of your design experience.",
-    image: "https://nextui.org/twitter-cards/nextui.jpeg",
+    image:
+      "https://avxwxkbyahehqfbikbfl.supabase.co/storage/v1/object/public/sentracar/showcase/Instagram%20Post.webp",
     creator: "@getnextui",
   },
   links: {
@@ -63,3 +64,17 @@ export const siteConfig = {
     { label: "Kontak", href: "/contact", haveChild: false },
   ],
 };
+
+export function buildDynamicSiteConfig(profile: any) {
+  return {
+    ...siteConfig,
+    name: profile?.name ?? siteConfig.name,
+    description: profile?.description ?? siteConfig.description,
+    imgUrl: profile?.logoUrl ?? siteConfig.imgUrl,
+    email: profile?.email ?? siteConfig.email,
+    phone: profile?.phone ?? siteConfig.phone,
+    address: profile?.address ?? siteConfig.address,
+    googleMapUrl: profile?.googleMapUrl ?? "",
+    whatsappTemplate: profile?.whatsappTemplate ?? "",
+  };
+}

@@ -9,6 +9,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import React, {
   forwardRef,
   ForwardRefRenderFunction,
+  useEffect,
   useImperativeHandle,
 } from "react";
 import {
@@ -39,8 +40,10 @@ const ModalRentCar: ForwardRefRenderFunction<ModalRentRefType, Props> = (
 ) => {
   const { control, handleSubmit, setValue, setError } = useForm({
     defaultValues: {
-      date_rent: "",
-      day_rent: "",
+      start_date: "",
+      end_date: "",
+      car_id: "",
+      car_name: "",
       name: "",
       contact: "",
       address: "",
@@ -52,6 +55,13 @@ const ModalRentCar: ForwardRefRenderFunction<ModalRentRefType, Props> = (
     setError,
     setValue,
   }));
+
+  useEffect(() => {
+    if (detailData) {
+      setValue("car_id", detailData.name);
+      setValue("car_name", detailData.name);
+    }
+  }, [isOpen, setValue, detailData]);
 
   return (
     <Modal isOpen={isOpen} className="max-w-xl">
@@ -128,16 +138,16 @@ const ModalRentCar: ForwardRefRenderFunction<ModalRentRefType, Props> = (
           </div>
           <div className="grid grid-cols-2 gap-4 pt-5">
             <InputDate
-              label="Tanggal Sewa"
-              name="date_rent"
+              label="Dari Tanggal"
+              name="start_date"
               control={control}
               placeholder="Tanggal Sewa"
             />
-            <InputNum
-              label="Lama Sewa"
-              name="day_rent"
+            <InputDate
+              label="Sampai Tanggal"
+              name="end_date"
               control={control}
-              placeholder="Masukan Jumlah Hari"
+              placeholder="Tanggal Sewa"
             />
             <div className="col-span-2">
               <InputText
@@ -152,7 +162,7 @@ const ModalRentCar: ForwardRefRenderFunction<ModalRentRefType, Props> = (
                 label="Nomer Kontak"
                 name="contact"
                 control={control}
-                placeholder="Masukan Jumlah Hari"
+                placeholder="Masukan Nomer Yang Dapat Dihubungi"
               />
             </div>
             <div className="col-span-2">
