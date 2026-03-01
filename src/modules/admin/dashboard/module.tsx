@@ -4,8 +4,25 @@ import Image from "next/image";
 import { Button } from "@/components/button";
 import { FiArrowRight } from "react-icons/fi";
 import { FaCar } from "react-icons/fa";
+import { api } from "@/libs/trpc/react";
+
+const CardSkeleton = () => {
+  return (
+    <div className="relative w-full bg-white rounded-md border border-gray-200 px-4 py-5 shadow-6 animate-pulse">
+      <div className="flex w-full justify-between">
+        <div className="flex flex-col space-y-2 w-1/2">
+          <div className="h-8 bg-gray-200 rounded w-1/2" />
+          <div className="h-4 bg-gray-200 rounded w-3/4" />
+        </div>
+        <div className="h-10 w-10 bg-gray-200 rounded-md" />
+      </div>
+    </div>
+  );
+};
 
 const DashboardAdmin = () => {
+  const { data: dashboard, isLoading } = api.dashboard.getDashboard.useQuery();
+
   return (
     <div className="relative w-full">
       <div className="relative bg-gradient-to-r from-indigo-800 to-indigo-500 rounded-2xl overflow-hidden px-5 py-10 lg:p-12 text-white">
@@ -19,62 +36,79 @@ const DashboardAdmin = () => {
             penawaran unit anda
           </p>
           <div>
-            <Button size={"sm"} className="mt-4" endIcon={<FiArrowRight />}>
+            <Button
+              href="/admin/carmanagement"
+              size={"sm"}
+              className="mt-4"
+              endIcon={<FiArrowRight />}
+            >
               Buat Mobil
             </Button>
           </div>
         </div>
 
         <div className="relative z-20 grid grid-cols-1 lg:grid-cols-3 gap-4 w-full pt-10">
-          <div className="relative w-full bg-white rounded-md border border-gray-200 px-4 py-5 shadow-6">
-            <div className="flex w-full justify-between">
-              <div className="flex flex-col space-y-1">
-                <h3 className="text-xl lg:text-4xl font-semibold text-black">
-                  14
-                </h3>
-                <p className="text-sm text-gray-500 font-normal">Total Mobil</p>
+          {isLoading ? (
+            <>
+              <CardSkeleton />
+              <CardSkeleton />
+              <CardSkeleton />
+            </>
+          ) : (
+            <>
+              <div className="relative w-full bg-white rounded-md border border-gray-200 px-4 py-5 shadow-6">
+                <div className="flex w-full justify-between">
+                  <div className="flex flex-col space-y-1">
+                    <h3 className="text-xl lg:text-4xl font-semibold text-black">
+                      {dashboard?.totalUnit || 0}
+                    </h3>
+                    <p className="text-sm text-gray-500 font-normal">
+                      Total Mobil
+                    </p>
+                  </div>
+                  <div>
+                    <span className="inline-flex items-center px-2 py-2 ring-1 ring-inset ring-gray-200 text-heading text-sm font-medium rounded-md shadow-sm bg-neutral-primary-soft">
+                      <FaCar className="text-primary text-sm" />
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div>
-                <span className="inline-flex items-center px-2 py-2 ring-1 ring-inset ring-gray-200 text-heading text-sm font-medium rounded-md shadow-sm bg-neutral-primary-soft">
-                  <FaCar className="text-primary text-sm" />
-                </span>
+              <div className="relative w-full bg-white rounded-md border border-gray-200 px-4 py-5 shadow-6">
+                <div className="flex w-full justify-between">
+                  <div className="flex flex-col space-y-1">
+                    <h3 className="text-xl lg:text-4xl font-semibold text-black">
+                      {dashboard?.totalUnitInActive || 0}
+                    </h3>
+                    <p className="text-sm text-gray-500 font-normal">
+                      Mobil Tersewa
+                    </p>
+                  </div>
+                  <div>
+                    <span className="inline-flex items-center px-2 py-2 ring-1 ring-inset ring-gray-200 text-heading text-sm font-medium rounded-md shadow-sm bg-neutral-primary-soft">
+                      <FaCar className="text-success text-sm" />
+                    </span>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-          <div className="relative w-full bg-white rounded-md border border-gray-200 px-4 py-5 shadow-6">
-            <div className="flex w-full justify-between">
-              <div className="flex flex-col space-y-1">
-                <h3 className="text-xl lg:text-4xl font-semibold text-black">
-                  1
-                </h3>
-                <p className="text-sm text-gray-500 font-normal">
-                  Mobil Tersewa
-                </p>
+              <div className="relative w-full bg-white rounded-md border border-gray-200 px-4 py-5 shadow-6">
+                <div className="flex w-full justify-between">
+                  <div className="flex flex-col space-y-1">
+                    <h3 className="text-xl lg:text-4xl font-semibold text-black">
+                      {dashboard?.totalCategory || 0}
+                    </h3>
+                    <p className="text-sm text-gray-500 font-normal">
+                      Total Category Unit
+                    </p>
+                  </div>
+                  <div>
+                    <span className="inline-flex items-center px-2 py-2 ring-1 ring-inset ring-gray-200 text-heading text-sm font-medium rounded-md shadow-sm bg-neutral-primary-soft">
+                      <FaCar className="text-danger text-sm" />
+                    </span>
+                  </div>
+                </div>
               </div>
-              <div>
-                <span className="inline-flex items-center px-2 py-2 ring-1 ring-inset ring-gray-200 text-heading text-sm font-medium rounded-md shadow-sm bg-neutral-primary-soft">
-                  <FaCar className="text-success text-sm" />
-                </span>
-              </div>
-            </div>
-          </div>
-          <div className="relative w-full bg-white rounded-md border border-gray-200 px-4 py-5 shadow-6">
-            <div className="flex w-full justify-between">
-              <div className="flex flex-col space-y-1">
-                <h3 className="text-xl lg:text-4xl font-semibold text-black">
-                  13
-                </h3>
-                <p className="text-sm text-gray-500 font-normal">
-                  Mobil Tersedia
-                </p>
-              </div>
-              <div>
-                <span className="inline-flex items-center px-2 py-2 ring-1 ring-inset ring-gray-200 text-heading text-sm font-medium rounded-md shadow-sm bg-neutral-primary-soft">
-                  <FaCar className="text-danger text-sm" />
-                </span>
-              </div>
-            </div>
-          </div>
+            </>
+          )}
         </div>
 
         <div className="absolute inset-0 bg-indigo-900/20 lg:hidden z-10" />

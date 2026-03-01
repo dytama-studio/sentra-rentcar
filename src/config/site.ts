@@ -64,3 +64,17 @@ export const siteConfig = {
     { label: "Kontak", href: "/contact", haveChild: false },
   ],
 };
+
+export function buildDynamicSiteConfig(profile: any) {
+  return {
+    ...siteConfig,
+    name: profile?.name ?? siteConfig.name,
+    description: profile?.description ?? siteConfig.description,
+    imgUrl: profile?.logoUrl ?? siteConfig.imgUrl,
+    email: profile?.email ?? siteConfig.email,
+    phone: profile?.phone ?? siteConfig.phone,
+    address: profile?.address ?? siteConfig.address,
+    googleMapUrl: profile?.googleMapUrl ?? "",
+    whatsappTemplate: profile?.whatsappTemplate ?? "",
+  };
+}

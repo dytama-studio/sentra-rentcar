@@ -1,7 +1,7 @@
 import { TRPCError } from "@trpc/server";
 import { createTRPCRouter, publicProcedure } from "../../trpc";
 import { asc, eq } from "drizzle-orm";
-import { db, car, carCategory } from "@/server/database";
+import { db, car, carCategory, organization } from "@/server/database";
 
 export const landingRouter = createTRPCRouter({
   getCarLanding: publicProcedure.query(async () => {
@@ -40,6 +40,25 @@ export const landingRouter = createTRPCRouter({
         code: "INTERNAL_SERVER_ERROR",
         message: `Gagal fetch product`,
       });
+    }
+  }),
+  getPublicLandingInfo: publicProcedure.query(async () => {
+    try {
+      const data = await db
+        .select()
+        .from(organization)
+        .then((res) => res.at(0));
+
+      return {
+        data,
+        meta: {
+          code: 200,
+          status: "success",
+          message: "Berhasil ambil data",
+        },
+      };
+    } catch (err) {
+      throw new Error(err as string);
     }
   }),
 });

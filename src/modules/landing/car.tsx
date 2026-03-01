@@ -22,9 +22,8 @@ const CarSection = () => {
     showAll,
     handleToggleShow,
     detailData,
+    onSubmitRent,
   } = useLanding();
-
-  const onSubmit = (values: any) => {};
 
   return (
     <section className="relative justify-center mt-5 lg:mt-10" id="CarList">
@@ -32,7 +31,7 @@ const CarSection = () => {
         <ModalRentCar
           isOpen={openModalBook}
           handleClose={handleCloseModalBook}
-          onSubmit={onSubmit}
+          onSubmit={onSubmitRent}
           detailData={detailData}
         />
       )}

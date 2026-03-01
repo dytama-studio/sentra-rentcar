@@ -1,12 +1,22 @@
 "use client";
 
 import { handleToContact } from "@/helpers/globalHelper";
+import { useSiteConfig } from "@/libs/site/site-config.provider";
 import Image from "next/image";
 
 export default function FloatingWhatsApp() {
+  const config = useSiteConfig();
+  const handleClick = () => {
+    handleToContact({
+      phone: config.phone,
+      message:
+        config.whatsappTemplate ??
+        `Halo saya tertarik dengan layanan ${config.name}`,
+    });
+  };
   return (
     <button
-      onClick={handleToContact}
+      onClick={handleClick}
       rel="noopener noreferrer"
       className="
         fixed bottom-6 right-6 z-50

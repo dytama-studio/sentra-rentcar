@@ -33,6 +33,30 @@ export function useLanding() {
     setShowAll((prev) => !prev);
   };
 
+  const onSubmitRent = (values: any) => {
+    const phoneNumber = "6281234567890";
+
+    const message = `
+    Halo Admin Rental 👋
+    
+    Saya ingin booking unit dengan detail berikut:
+    
+    🚗 Mobil: ${values?.car_name}
+    📅 Tanggal Mulai: ${values.start_date}
+    📅 Tanggal Selesai: ${values.end_date}
+    📍 Lokasi Jemput: ${values.address}
+    👤 Nama: ${values.name}
+    📞 No HP: ${values.contact}
+    
+    Mohon info ketersediaan dan total harga ya 🙏
+      `;
+
+    const encodedMessage = encodeURIComponent(message);
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+    window.open(whatsappURL, "_blank");
+  };
+
   return {
     tabs,
     tabActive,
@@ -47,5 +71,6 @@ export function useLanding() {
     showAll,
     handleToggleShow,
     detailData,
+    onSubmitRent,
   };
 }

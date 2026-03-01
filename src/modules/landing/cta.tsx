@@ -4,8 +4,19 @@ import Image from "next/image";
 import { handleToContact } from "@/helpers/globalHelper";
 import { FiArrowRight } from "react-icons/fi";
 import Container from "@/components/container";
+import { useSiteConfig } from "@/libs/site/site-config.provider";
 
 const CTASection = () => {
+  const config = useSiteConfig();
+
+  const handleClick = () => {
+    handleToContact({
+      phone: config.phone,
+      message:
+        config.whatsappTemplate ??
+        `Halo saya tertarik dengan layanan ${config.name}`,
+    });
+  };
   return (
     <section className="py-10 lg:py-20" id="cta">
       <Container>
@@ -22,7 +33,7 @@ const CTASection = () => {
             </p>
 
             <button
-              onClick={handleToContact}
+              onClick={handleClick}
               className="mt-6 inline-flex items-center gap-3 bg-white text-black hover:bg-blue-100 transition-all rounded-full px-5 py-2.5 text-sm font-medium"
             >
               Hubungi Kami

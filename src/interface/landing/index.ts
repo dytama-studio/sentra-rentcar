@@ -10,8 +10,10 @@ export interface CarCardType {
 }
 
 export type FormPenyewaValue = {
-  date_rent: string;
-  day_rent: string;
+  start_date: string;
+  end_date: string;
+  car_id: string;
+  car_name: string;
   name: string;
   contact: string;
   address: string;
