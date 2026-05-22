@@ -1,0 +1,110 @@
+Sentra Rent Car - Current Working Features
+
+This file summarizes features that are currently implemented and visible in the codebase as of 2026-05-22.
+
+1. Public Website Features
+
+- Public landing page is available.
+- Landing page includes:
+  Hero section
+  Car listing section
+  How to use section
+  Why choose us section
+  FAQ section
+  Testimonials section
+  CTA section
+- Public contact page is available.
+- Contact page supports business contact information display.
+- Contact page supports Google Maps embed using organization profile data.
+- Public car catalog is loaded from database.
+- Only cars with active status are shown on the public landing page.
+- Users can trigger booking/inquiry intent from the landing page through CTA and rent modal flows.
+- WhatsApp/contact redirection helpers are present for lead generation.
+- SEO base support exists through page metadata, sitemap, robots, favicon, and Open Graph configuration.
+
+2. Authentication Features
+
+- Admin sign in page is available.
+- Admin sign up page is available.
+- Forget password page is available.
+- Reset password page is available.
+- Authentication uses Better Auth.
+- Email/password authentication is enabled.
+- Reset password email delivery is implemented through SMTP mailer integration.
+- Session management is implemented with expiration, refresh window, cookie cache, and rate limiting.
+
+3. Admin Panel Features
+
+- Admin dashboard page is available.
+- Dashboard shows summary metrics:
+  Total unit
+  Total inactive unit
+  Total car category
+- Admin car management list page is available.
+- Admin can search cars in the management table.
+- Admin can paginate car list data.
+- Admin can create a new car.
+- Admin can edit existing car data.
+- Admin can view car detail for editing.
+- Admin can delete car data.
+- Admin can create car categories.
+- Admin can fetch category list for form/dropdown usage.
+- Car data includes key fields such as:
+  Name
+  Category
+  Price per day
+  Description
+  Thumbnail
+  Transmission
+  Status
+  Capacity
+  Storage
+- Admin profile page is available.
+- Admin can update organization/company profile data.
+- Profile fields currently used in app include:
+  Name
+  Slug
+  Logo URL
+  Description
+  Google Map URL
+  WhatsApp template
+  Phone
+  Email
+  Address
+
+4. Storage and Data Features
+
+- Application uses PostgreSQL with Drizzle ORM.
+- Supabase Storage is used for car image uploads.
+- Uploaded car thumbnails are stored under organization-based paths.
+- Thumbnail files are removed from Supabase Storage when a car is deleted.
+- Seed script creates initial organization, branch, and admin account.
+
+5. API and System Features
+
+- tRPC API is implemented for app data flow.
+- Public landing data endpoint is implemented.
+- Public organization/landing info endpoint is implemented.
+- Protected dashboard endpoint is implemented.
+- Protected car management endpoints are implemented.
+- Protected organization profile endpoint is implemented.
+- User-to-organization and branch relation lookup is implemented.
+- Keep-alive API route exists.
+
+6. Features Present in Database but Not Yet Confirmed as Full App Features
+
+The following items already exist in the database/schema layer, but are not yet clearly exposed as complete end-user or admin features in the current app pages/routes:
+
+- Booking management
+- Payment management
+- Testimonial management from database
+- Custom SEO page management
+
+7. Short Product Summary
+
+Current product position:
+
+- Public marketing website for a car rental business
+- Admin panel for operational content and vehicle management
+- Authentication, image upload, and organization profile management already working
+- Ready to be extended into booking and payment workflows
