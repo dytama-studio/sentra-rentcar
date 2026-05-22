@@ -2,6 +2,10 @@
 
 Sentra Rent Car is a car rental management and marketing application built with Next.js, Supabase, PostgreSQL, Drizzle ORM, and Better Auth.
 
+Copyright (c) 2026 Dytama Digital - https://www.dytama.com. All rights reserved.
+
+This repository is distributed as proprietary source code unless a separate written agreement states otherwise. See [LICENSE](./LICENSE), [TERMS.md](./TERMS.md), and [OWNERSHIP.md](./OWNERSHIP.md) for ownership, usage, and commercial handoff terms.
+
 This README focuses on two things:
 
 1. How to install and run the project locally

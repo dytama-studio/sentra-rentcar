@@ -6,6 +6,7 @@ import NavbarLanding from "../navbar";
 import PageTransition from "../pageloader/PageTransition";
 import FloatingWhatsApp from "../floatingwa/FloatingWhatsapp";
 import { authClient } from "@/server/auth/client";
+import SmoothScrollProvider from "../effect/smoothscroll";
 
 type Props = {
   children: ReactNode;
@@ -25,12 +26,17 @@ export default function PublicLayout({ children }: Props) {
 
   return (
     <PageTransition>
-      <main className="flex-1 content bg-white" id="app-container">
-        <NavbarLanding user={session?.user ?? null} session={session ?? null} />
-        {children}
-        <FloatingWhatsApp />
-        <FooterLanding />
-      </main>
+      <SmoothScrollProvider>
+        <main className="flex-1 content bg-white" id="app-container">
+          <NavbarLanding
+            user={session?.user ?? null}
+            session={session ?? null}
+          />
+          {children}
+          <FloatingWhatsApp />
+          <FooterLanding />
+        </main>
+      </SmoothScrollProvider>
     </PageTransition>
   );
 }
