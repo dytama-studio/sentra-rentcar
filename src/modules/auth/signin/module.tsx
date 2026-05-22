@@ -18,7 +18,6 @@ import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
 import InputText from "@/components/inputs/InputText";
 import InputPassword from "@/components/inputs/InputPassword";
-// import bcrypt from "bcryptjs";
 
 interface Props {
   onSubmit: SubmitHandler<UserLogin>;
@@ -43,28 +42,10 @@ const SignInModule: ForwardRefRenderFunction<SignInFormRefType, Props> = (
     },
   });
 
-  // const checkPass = async () => {
-  //   const plainPassword = "admin480!";
-  //   const hashedPasswordFromDB =
-  //     "$2b$10$JwwCXP8Dl0s6yuDyC0AcNuu0zQNJBhZtddNzSLPO52uzv0XPS5z.e"; // isi dari tabel account.password
-
-  //   const isMatch = await bcrypt.compare(plainPassword, hashedPasswordFromDB);
-
-  //   if (isMatch) {
-  //     console.log("Password benar!");
-  //   } else {
-  //     console.log("Password salah!");
-  //   }
-  // };
-
   useImperativeHandle(ref, () => ({
     setError,
     setValue,
   }));
-
-  // useEffect(() => {
-  //   checkPass();
-  // }, []);
 
   return (
     <div className="mb-16 w-full lg:px-16 ">
