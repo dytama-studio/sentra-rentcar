@@ -77,9 +77,16 @@ const FooterLanding = () => {
           </div>
         </div>
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 py-4 border-t mt-6 border-slate-200">
-          <p className="text-center">
-            Copyright 2026 © <a href="https://prebuiltui.com">Dytama Studio</a>{" "}
-            All Right Reserved.
+          <p className="text-center text-xs sm:text-sm text-gray-100">
+            Copyright 2026 © Sentra Rent Car.{" "}
+            <a
+              href="https://www.dytama.com"
+              target="_blank"
+              rel="noreferrer"
+              className="font-medium hover:text-white"
+            >
+              Template by Dytama
+            </a>
           </p>
           <div className="flex items-center gap-4">
             <a href="/">Privacy Policy</a>
